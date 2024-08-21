@@ -20,9 +20,14 @@
             padding: 10px 30px;
         }
 
+        .menu-left, .menu-right {
+            display: flex;
+            align-items: center;
+        }
+
         .menu img {
-            width: 300px; /* Adjust the size of the images */
-            height: auto;
+            width: auto; /* Adjust the size of the images */
+            height: 50px;
             cursor: pointer;
             margin: 0 20px;
         }
@@ -45,7 +50,7 @@
             <img src="path/to/cosurr_image.png" alt="Cosurr">
             <img src="path/to/postman_of_the_universe_image.png" alt="Postman of the Universe">
         </div>
-        <div class="menu">
+        <div class="menu-right">
             <img src="path/to/biography_image.png" alt="Biography" onclick="showSection('biography')">
             <img src="path/to/contacts_image.png" alt="Contacts" onclick="showSection('contacts')">
         </div>
