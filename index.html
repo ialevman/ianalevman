@@ -5,14 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap');
-
-        body {
+        body, html {
             margin: 0;
             padding: 0;
             background-color: black;
             color: white;
-            font-family: 'Comic Neue', cursive;
+            font-family: 'Arial', sans-serif;
         }
 
         .header {
@@ -22,25 +20,11 @@
             padding: 10px 30px;
         }
 
-        .title {
-            font-size: 24px;
-            text-transform: uppercase;
-        }
-
-        .menu {
-            display: flex;
-            justify-content: flex-end;
-        }
-
-        .menu a {
-            color: white;
-            text-decoration: none;
-            margin-left: 40px;
-            font-size: 18px;
-        }
-
-        .menu a:hover {
-            color: #f0f0f0;
+        .menu img {
+            width: 300px; /* Adjust the size of the images */
+            height: auto;
+            cursor: pointer;
+            margin: 0 20px;
         }
 
         .section {
@@ -51,15 +35,19 @@
         #biography, #contacts {
             display: none; /* Initially hidden sections */
         }
+
     </style>
 </head>
 <body>
 
     <div class="header">
-        <div class="title">Cosurr | Postman of the Universe</div>
+        <div class="menu-left">
+            <img src="path/to/cosurr_image.png" alt="Cosurr">
+            <img src="path/to/postman_of_the_universe_image.png" alt="Postman of the Universe">
+        </div>
         <div class="menu">
-            <a href="#biography" onclick="showSection('biography')">Biography</a>
-            <a href="#contacts" onclick="showSection('contacts')">Contacts</a>
+            <img src="path/to/biography_image.png" alt="Biography" onclick="showSection('biography')">
+            <img src="path/to/contacts_image.png" alt="Contacts" onclick="showSection('contacts')">
         </div>
     </div>
 
