@@ -11,34 +11,47 @@
             background-color: black;
             color: white;
             font-family: 'Arial', sans-serif;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
         }
 
         .header {
+            width: 100%;
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            padding: 10px 30px;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
         .menu-left, .menu-right {
             display: flex;
-            align-items: center;
         }
 
         .menu img {
-            width: auto; /* Adjust the size of the images */
             height: 50px;
             cursor: pointer;
             margin: 0 20px;
         }
 
-        .section {
-            padding: 50px;
-            text-align: center;
+        .menu-left img {
+            margin-left: 0;
         }
 
-        #biography, #contacts {
-            display: none; /* Initially hidden sections */
+        .menu-right img {
+            margin-right: 0;
+        }
+
+        .section {
+            text-align: center;
+            display: none; /* Initially hidden */
+            width: 100%;
+        }
+
+        .section.active {
+            display: block; /* Show the section when active */
         }
 
     </style>
@@ -68,10 +81,14 @@
 
     <script>
         function showSection(sectionId) {
-            document.getElementById('biography').style.display = 'none';
-            document.getElementById('contacts').style.display = 'none';
+            // Hide all sections
+            var sections = document.querySelectorAll('.section');
+            sections.forEach(function(section) {
+                section.classList.remove('active');
+            });
 
-            document.getElementById(sectionId).style.display = 'block';
+            // Show the selected section
+            document.getElementById(sectionId).classList.add('active');
         }
     </script>
 
