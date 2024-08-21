@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        .menu {
+            display: flex;
+            justify-content: center;
+            background-color: #333;
+            padding: 10px 0;
+        }
+
+        .menu a {
+            color: white;
+            text-decoration: none;
+            margin: 0 20px;
+            font-size: 18px;
+        }
+
+        .menu a:hover {
+            color: #f0f0f0;
+        }
+
+        .section {
+            padding: 50px;
+            text-align: center;
+        }
+
+        #biography, #contacts {
+            display: none; /* Initially hidden sections */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="menu">
+        <a href="#biography" onclick="showSection('biography')">Biography</a>
+        <a href="#contacts" onclick="showSection('contacts')">Contacts</a>
+    </div>
+
+    <div id="biography" class="section">
+        <h1>Biography</h1>
+        <p>Here will be the biography content.</p>
+    </div>
+
+    <div id="contacts" class="section">
+        <h1>Contacts</h1>
+        <p>Here will be the contact information.</p>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            document.getElementById('biography').style.display = 'none';
+            document.getElementById('contacts').style.display = 'none';
+
+            document.getElementById(sectionId).style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>
