@@ -308,6 +308,14 @@
   color: var(--bottle-name-ink); text-transform: uppercase; padding: 6px 0;
 }
 .bottle-menu .bottle-menu-link.text-xl { font-size: 20px; }
+/* Close cross: plain red, menu-sized, no box or focus ring. */
+.bottle-menu > button.absolute {
+  top: 22px; right: 16px; padding: 4px; opacity: 1; background: none !important;
+  color: var(--bottle-name-ink); box-shadow: none !important; outline: none;
+  --tw-ring-shadow: 0 0 #0000; --tw-ring-offset-shadow: 0 0 #0000;
+}
+.bottle-menu > button.absolute:focus-visible { outline: 2px solid var(--bottle-name-ink); outline-offset: 2px; }
+.bottle-menu > button.absolute svg { width: 36px; height: 36px; stroke-width: 2.5; }
 @media (max-width: 767px) {
   /* Keep the half bottle's real proportions on phones; the red label carries only the burger. */
   .bottle-header { height: calc(100vw * 339 / 2171); }
