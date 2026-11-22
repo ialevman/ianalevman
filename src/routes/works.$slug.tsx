@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+import { unlockVideo } from "@/lib/private-video";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { works, ARTIST } from "@/data/works";
 import { AcquireSheet } from "@/components/acquire-sheet";
@@ -35,8 +37,8 @@ function WorkPage() {
   return (
     <div className="gallery-lettering mx-auto grid max-w-6xl gap-10 px-5 pt-10 md:grid-cols-[1.6fr_1fr]">
       <div className="grid gap-10">
-        {work.video ? (
-          <video src={work.video} poster={work.image} controls playsInline preload="metadata" width={work.w} height={work.h} className="fade-in h-auto w-full bg-foreground" aria-label={work.title} />
+        {work.privateVideo ? (
+          <PrivateVideo slug={work.slug} title={work.title} poster={work.image} w={work.w} h={work.h} />
         ) : (
           <img src={work.image} alt={work.title} width={work.w} height={work.h} className="fade-in h-auto w-full" />
         )}
@@ -68,6 +70,42 @@ function WorkPage() {
           )}
         </div>
       </aside>
+    </div>
+  );
+}
+
+/** Poster with a password field; after the server accepts the password the full video plays here. */
+function PrivateVideo({ slug, title, poster, w, h }: { slug: string; title: string; poster: string; w: number; h: number }) {
+  const [url, setUrl] = useState<string | null>(null);
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const key = `unlocked:${slug}`;
+  useEffect(() => {
+    try { const saved = sessionStorage.getItem(key); if (saved) void submit(saved); } catch { /* storage unavailable */ }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  async function submit(pw: string) {
+    setBusy(true); setError(false);
+    try {
+      const res = await unlockVideo({ data: { slug, password: pw } });
+      if (res.ok) { setUrl(res.url); try { sessionStorage.setItem(key, pw); } catch { /* ignore */ } }
+      else setError(true);
+    } catch { setError(true); } finally { setBusy(false); }
+  }
+  if (url) return <video src={url} poster={poster} controls autoPlay playsInline width={w} height={h} className="fade-in h-auto w-full bg-foreground" aria-label={title} />;
+  return (
+    <div className="relative">
+      <img src={poster} alt={title} width={w} height={h} className="fade-in h-auto w-full brightness-[0.55]" />
+      <form onSubmit={(e) => { e.preventDefault(); void submit(password); }} className="absolute inset-0 flex flex-col items-center justify-center gap-3 px-6 text-center text-white">
+        <label htmlFor="video-pw" className="text-xl font-bold md:text-2xl">Private screening — enter password</label>
+        <div className="flex gap-2">
+          <input id="video-pw" type="password" inputMode="numeric" autoComplete="off" value={password} onChange={(e) => setPassword(e.target.value)}
+            className="w-40 border-b-2 border-white bg-transparent px-1 py-1 text-center text-xl text-white outline-none placeholder:text-white/60" placeholder="Password" />
+          <button type="submit" disabled={busy} className="px-3 text-xl font-bold underline underline-offset-4">{busy ? "…" : "Play"}</button>
+        </div>
+        {error && <p role="alert" className="text-base">Wrong password</p>}
+      </form>
     </div>
   );
 }
