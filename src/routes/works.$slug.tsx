@@ -34,7 +34,12 @@ function WorkPage() {
   const { work } = Route.useLoaderData();
   return (
     <div className="gallery-lettering mx-auto grid max-w-6xl gap-10 px-5 pt-10 md:grid-cols-[1.6fr_1fr]">
-      <img src={work.image} alt={work.title} width={work.w} height={work.h} className="fade-in h-auto w-full" />
+      <div className="grid gap-10">
+        <img src={work.image} alt={work.title} width={work.w} height={work.h} className="fade-in h-auto w-full" />
+        {work.extra?.map((p) => (
+          <img key={p.src} src={p.src} alt={p.alt} width={p.w} height={p.h} loading="lazy" className="h-auto w-full" />
+        ))}
+      </div>
       <aside className="md:sticky md:top-10 md:self-start">
         <Button asChild variant="lettering" className="h-auto p-0 text-xl font-normal md:text-2xl"><Link to="/"><ArrowLeft aria-hidden />All works</Link></Button>
         <div className="mt-8">
