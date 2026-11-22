@@ -3,7 +3,7 @@ import { toast } from "sonner";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetTrigger } from "@/components/ui/sheet";
 import type { Work } from "@/data/works";
 import { Button } from "@/components/ui/button";
-import bottle from "@/assets/acquire-whole-bottle.png.asset.json";
+const bottle = { url: "/media/acquire-whole-bottle.webp" };
 
 export function AcquireSheet({ work }: { work: Work }) {
   const [open, setOpen] = useState(false);

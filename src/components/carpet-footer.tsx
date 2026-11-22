@@ -1,6 +1,6 @@
-import a from "@/assets/carpet-only-a.jpg.asset.json";
-import b from "@/assets/carpet-only-c.jpg.asset.json";
-import m from "@/assets/carpet-only-monster2.jpg.asset.json";
+const a = { url: "/media/carpet-a.webp" };
+const b = { url: "/media/carpet-c.webp" };
+const m = { url: "/media/carpet-monster.webp" };
 
 /** Carpet-only footer: the artist's wall carpet stretched edge to edge; ornaments slowly shift through a monster moment. */
 export function CarpetFooter({ children }: { children: React.ReactNode }) {

@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { Pause, Play, Volume2, VolumeX } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import video from "@/assets/mirror_in_mirror.mp4.asset.json";
+const video = { url: "/media/mirror-in-mirror.mp4" };
 
 /** Full uncropped video in the centre; the sides are filled with a soft, blurred, enlarged copy of the same video. */
 export function HeroVideo() {

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "@tanstack/react-router";
 import { ARTIST } from "@/data/works";
-import half from "@/assets/bottle-restored-cap.png.asset.json";
+const half = { url: "/media/bottle-restored-cap.webp" };
 import { ArrowUp, Instagram, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { shouldHideBottle, shouldRenderBottle } from "@/lib/header-scroll";
