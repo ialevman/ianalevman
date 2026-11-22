@@ -1,15 +1,22 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Pause, Play, Volume2, VolumeX } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 const video = { url: "/media/mirror-in-mirror.mp4" };
 
-/** Full uncropped video in the centre; the sides are filled with a soft, blurred, enlarged copy of the same video. */
+/** Full-bleed hero video layered over a blurred copy of itself. */
 export function HeroVideo() {
   const ref = useRef<HTMLVideoElement>(null);
   const bg = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(true);
   const [muted, setMuted] = useState(true);
+  // Keep the blurred copy in step with the sharp one, otherwise the see-through top layer ghosts.
+  useEffect(() => {
+    const v = ref.current, b = bg.current; if (!v || !b) return;
+    const sync = () => { if (Math.abs(b.currentTime - v.currentTime) > 0.12) b.currentTime = v.currentTime; };
+    v.addEventListener("timeupdate", sync); v.addEventListener("seeked", sync);
+    return () => { v.removeEventListener("timeupdate", sync); v.removeEventListener("seeked", sync); };
+  }, []);
   const toggle = () => {
     const v = ref.current; if (!v) return;
     if (v.paused) { void v.play(); void bg.current?.play(); setPlaying(true); }
@@ -17,10 +24,11 @@ export function HeroVideo() {
   };
   return (
     <div data-hero-video className="relative aspect-video w-full overflow-hidden bg-foreground md:aspect-auto md:h-[85vh] md:min-h-[480px]">
+      {/* Two copies of the same full-bleed video: a soft blurred one underneath, the sharp one on top, slightly see-through so the blur softens the pixels. */}
       <video ref={bg} src={video.url} autoPlay muted loop playsInline aria-hidden
-        className="absolute inset-0 hidden h-full w-full scale-110 object-cover opacity-70 blur-2xl md:block" />
+        className="absolute inset-0 h-full w-full scale-110 object-cover blur-2xl" />
       <video ref={ref} src={video.url} autoPlay muted loop playsInline
-        className="hero-main-video fade-in relative mx-auto h-full w-full object-cover md:w-auto md:object-contain" style={{ maskImage: "linear-gradient(to right, transparent, black 38%, black 62%, transparent)", WebkitMaskImage: "linear-gradient(to right, transparent, black 38%, black 62%, transparent)" }} />
+        className="fade-in absolute inset-0 h-full w-full object-cover opacity-[0.85]" />
       <TooltipProvider delayDuration={200}>
         <div className="absolute bottom-4 left-4 flex gap-3">
           <Tooltip>

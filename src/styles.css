@@ -229,7 +229,6 @@
 .gallery-lettering, .gallery-caption {
   font-family: var(--font-bottle-label); font-weight: 700; letter-spacing: 0; text-transform: none;
 }
-@media (max-width: 767px) { .hero-main-video { mask-image: none !important; -webkit-mask-image: none !important; } }
 .hero-video-control { color: var(--bottle-label-ink); width: 44px; height: 44px; }
 .hero-video-control svg { width: 28px; height: 28px; filter: drop-shadow(0 1px 2px var(--foreground)); }
 .bottle-header { height: min(15.615vw, 179.88px); }
