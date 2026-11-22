@@ -1,6 +1,5 @@
 import w1 from "@/assets/work-1.jpg";
 import w2 from "@/assets/work-2.jpg";
-import w4 from "@/assets/work-4.jpg";
 import w5 from "@/assets/work-5.jpg";
 
 export type Work = {
@@ -11,6 +10,10 @@ export type Work = {
   price: string; available: boolean; image: string; w: number; h: number; text: string;
   /** Additional photos shown under the main image on the detail page (e.g. framed views). */
   extra?: { src: string; w: number; h: number; alt: string }[];
+  /** Full video file for video works; `image` is used as its poster. */
+  video?: string;
+  /** Not sold, price given on request. */
+  onRequest?: boolean;
 };
 
 export const ARTIST = "Iana Levman";
@@ -21,7 +24,7 @@ export type Category = (typeof CATEGORIES)[number];
 export const works: Work[] = [
   { slug: "kitchen-at-dusk", category: "Paintings", title: "Kitchen at Dusk", year: 2025, medium: "Oil on linen", size: "100 × 80 cm", price: "€4,200", available: true, image: w1, w: 896, h: 1120, text: "A room remembered by the colour of its walls rather than its furniture." },
   { slug: "two-winters", category: "Paintings", title: "Two Winters", year: 2024, medium: "Acrylic and chalk on canvas", size: "90 × 90 cm", price: "€3,600", available: true, image: w2, w: 1024, h: 1024, text: "Two seasons overlapping, neither willing to leave." },
-  { slug: "sideboard-light", category: "Video", title: "Sideboard Light", year: 2023, medium: "Single-channel video, 6 min", size: "Edition of 3", price: "", available: false, image: w4, w: 1152, h: 864, text: "Light passing through something thick and cold." },
+  { slug: "mirror-in-the-mirror", category: "Video", title: "Mirror in the Mirror", year: 2026, medium: "Single-channel video performance, 8 min 56 s", size: "1920 × 1164", price: "", available: true, onRequest: true, image: "/media/mirror-in-mirror-poster.webp", w: 1600, h: 970, video: "/media/mirror-in-mirror-full.mp4", text: "A video performance about reflection and doubling, about the threshold between the self and its image." },
   { slug: "the-wall-above-the-bed", category: "Paintings", title: "The Wall Above the Bed", year: 2024, medium: "Oil on canvas", size: "100 × 80 cm", price: "€4,800", available: true, image: w5, w: 896, h: 1120, text: "Warm, heavy, a little too close." },
   { slug: "gods-ear", category: "Works on Paper", title: "God's ear", year: 2025, medium: "Cardboard, colored pencils, ink, shimmer pigment", size: "29 × 21 cm", price: "€510", available: true, image: "/media/works/gods-ear.webp", w: 634, h: 994, text: "Inspired by a symbol of omnipresence. This work was created as part of the production of the documentary film \"Home. A Place I Have Never Been.\" and was exhibited at Thule Koda, Kuressaare, Estonia, in 2025. Delivered unframed.", extra: [{ src: "/media/works/gods-ear-framed.webp", w: 800, h: 1200, alt: "God's ear shown framed (frame for presentation only)" }] },
   { slug: "entity", category: "Works on Paper", title: "Entity", year: 2025, medium: "Cardboard, colored pencils, ink, shimmer pigment", size: "29 × 21 cm", price: "€510", available: true, image: "/media/works/entity.webp", w: 570, h: 832, text: "This work was created as part of the production of the documentary film \"Home. A Place I Have Never Been.\" and was exhibited at Thule Koda, Kuressaare, Estonia, in 2025. Delivered unframed.", extra: [{ src: "/media/works/entity-framed.webp", w: 800, h: 1200, alt: "Entity shown framed (frame for presentation only)" }] },

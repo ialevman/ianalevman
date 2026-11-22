@@ -35,7 +35,11 @@ function WorkPage() {
   return (
     <div className="gallery-lettering mx-auto grid max-w-6xl gap-10 px-5 pt-10 md:grid-cols-[1.6fr_1fr]">
       <div className="grid gap-10">
-        <img src={work.image} alt={work.title} width={work.w} height={work.h} className="fade-in h-auto w-full" />
+        {work.video ? (
+          <video src={work.video} poster={work.image} controls playsInline preload="metadata" width={work.w} height={work.h} className="fade-in h-auto w-full bg-foreground" aria-label={work.title} />
+        ) : (
+          <img src={work.image} alt={work.title} width={work.w} height={work.h} className="fade-in h-auto w-full" />
+        )}
         {work.extra?.map((p) => (
           <img key={p.src} src={p.src} alt={p.alt} width={p.w} height={p.h} loading="lazy" className="h-auto w-full" />
         ))}
@@ -52,7 +56,7 @@ function WorkPage() {
         <div className="mt-10">
           {work.available ? (
             <>
-              <p className="mb-5 text-2xl font-bold">{work.price}</p>
+              <p className="mb-5 text-2xl font-bold">{work.onRequest ? "Price on request" : work.price}</p>
               <AcquireSheet work={work} />
             </>
           ) : (
