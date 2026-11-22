@@ -254,9 +254,9 @@
 .back-to-header:focus-visible { outline: 2px solid #f6e7c8; outline-offset: 4px; }
 .back-to-header svg { width: 26px; height: 26px; stroke-width: 2.5; }
 .bottle-neck-name {
-  position: absolute; left: 8.5%; top: 29%; width: 21%; transform: translateY(-50%);
+  position: absolute; left: 12.6%; top: 28%; width: 13.6%; transform: translateY(-50%);
   font-family: var(--font-bottle-label); color: var(--bottle-name-ink);
-  font-weight: 800; font-size: 24px; line-height: 1.05; text-align: center; letter-spacing: 0; text-transform: uppercase;
+  font-weight: 800; font-size: clamp(11px, 1.7vw, 20px); line-height: 1.05; text-align: center; letter-spacing: 0.02em; text-transform: uppercase;
   transition: top 700ms ease-in-out, left 700ms ease-in-out, width 700ms ease-in-out, font-size 700ms ease-in-out;
 }
 .bottle-label-nav {
@@ -311,7 +311,7 @@
 @media (max-width: 767px) {
   /* Keep the half bottle's real proportions on phones; the red label carries only the burger. */
   .bottle-header { height: calc(100vw * 339 / 2171); }
-  .bottle-neck-name { left: 8.5%; top: 29%; width: 21%; font-size: clamp(9px, 2.9vw, 14px); text-transform: none; }
+  .bottle-neck-name { left: 12.6%; top: 28%; width: 13.6%; font-size: clamp(8px, 2.5vw, 13px); }
   .bottle-label-nav { display: none; }
   .bottle-burger {
     display: inline-flex; position: absolute; left: 40%; right: 12%; top: 5%; height: 78%; width: auto;
