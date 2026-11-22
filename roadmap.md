@@ -1,0 +1,8 @@
+- [x] Update bottle navigation to Works, CV, About, Press and social icons.
+- [x] Restyle artwork pages and Acquire panel; remove the top bottle and use a small bottle Acquire command.
+- [x] Verify desktop and mobile artwork and navigation flows.
+- [ ] Fill CV and Press with artist-provided content; waiting for materials.
+- [x] Connect Instagram icon to the provided profile.
+- [x] Connect Telegram icon to the provided profile.
+- [x] Make the Acquire bottle whole and verify its opening action.
+- [x] Use regular-weight detail text, retain bold price and remove Available.

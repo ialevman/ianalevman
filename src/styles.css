@@ -1,0 +1,407 @@
+/*
+ * Tailwind v4 entry: config lives here, with no tailwind.config.js or PostCSS plugin.
+ * - Keep every @import in this top block, above @theme and the rest of the file. Install an
+ *   npm package before @importing its CSS. Never @import a remote URL (web fonts, CDN CSS): the
+ *   build resolves @import from the filesystem. Load those with a <link> in the head() of
+ *   src/routes/__root.tsx and name the family in a --font-* token in @theme inline below.
+ */
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Design system definition.
+ *
+ * The design lives in this file: oklch color tokens on the shadcn variables
+ * (--background, --foreground, --primary, --secondary, --muted, --accent, ...) plus
+ * new tokens as needed, font tokens, and custom styles and animations.
+ *
+ * The @theme inline block maps CSS custom properties to Tailwind utility
+ * classes (e.g. --color-primary -> bg-primary, text-primary).
+ *
+ * The :root and .dark blocks define the actual color values using oklch.
+ * All colors MUST use oklch format.
+ *
+ * To add a new semantic color:
+ * 1. Add the variable to :root (light value) and .dark (dark value)
+ * 2. Register it in @theme inline as --color-<name>: var(--<name>)
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@theme inline {
+  --font-display: "Bricolage Grotesque", ui-sans-serif, sans-serif;
+  --font-label: "Barlow Condensed", ui-sans-serif, sans-serif;
+  --font-bottle-label: "Roboto Slab", Georgia, serif;
+  --color-bottle: var(--bottle);
+  --color-burgundy: var(--burgundy);
+  --color-ochre: var(--ochre);
+  --color-dusty: var(--dusty);
+  --color-wool: var(--wool);
+}
+
+:root {
+  --radius: 0.25rem;
+  --wool: oklch(0.955 0.014 85);
+  --bottle: oklch(0.42 0.07 160);
+  --burgundy: oklch(0.43 0.09 20);
+  --ochre: oklch(0.7 0.11 75);
+  --dusty: oklch(0.62 0.05 240);
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.2 0.012 150);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.2 0.012 150);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.2 0.012 150);
+  --primary: oklch(0.36 0.07 160);
+  --primary-foreground: oklch(0.96 0.014 85);
+  --secondary: oklch(0.9 0.012 85);
+  --secondary-foreground: oklch(0.2 0.012 150);
+  --muted: oklch(0.91 0.01 85);
+  --muted-foreground: oklch(0.48 0.01 120);
+  --accent: oklch(0.43 0.09 20);
+  --accent-foreground: oklch(0.96 0.014 85);
+  --destructive: oklch(0.5 0.15 25);
+  --destructive-foreground: oklch(0.96 0.014 85);
+  --border: oklch(0.8 0.012 100);
+  --input: oklch(0.8 0.012 100);
+  --ring: oklch(0.42 0.07 160);
+  --chart-1: var(--bottle); --chart-2: var(--burgundy); --chart-3: var(--ochre); --chart-4: var(--dusty); --chart-5: oklch(0.7 0 0);
+  --sidebar: var(--card); --sidebar-foreground: var(--foreground); --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground); --sidebar-accent: var(--secondary);
+  --sidebar-accent-foreground: var(--foreground); --sidebar-border: var(--border); --sidebar-ring: var(--ring);
+  --carpet-blue: oklch(0.3 0.08 265);
+  --carpet-red: oklch(0.42 0.15 27);
+  --carpet-burgundy: oklch(0.38 0.12 15);
+  --carpet-ochre: oklch(0.74 0.13 78);
+  --carpet-cream: oklch(0.94 0.03 85);
+  --glass-tint: oklch(0.88 0.04 160 / 0.42);
+  --glass-edge: oklch(1 0 0 / 0.75);
+  --bottle-label-ink: oklch(0.96 0.035 88);
+  --bottle-name-ink: oklch(0.49 0.19 25);
+  --purchase-red: var(--bottle-name-ink);
+  --purchase-cream: var(--bottle-label-ink);
+  --purchase-glass: oklch(0.9 0.035 215 / 0.65);
+  --purchase-glass-edge: oklch(0.72 0.05 215 / 0.6);
+  --footer-ink: var(--bottle-label-ink);
+  --footer-form-glass: oklch(0.96 0.012 165 / 0.78);
+  --footer-form-edge: var(--glass-edge);
+  --footer-text-shadow: 0 2px 3px oklch(0.18 0.055 20 / 0.9), 0 0 12px oklch(0.18 0.055 20 / 0.7);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+  }
+}
+
+@layer base {
+  body { font-family: var(--font-display); font-size: 18px; line-height: 1.55; }
+  a { text-underline-offset: 3px; }
+}
+
+@utility font-label { font-family: var(--font-label); letter-spacing: 0.08em; text-transform: uppercase; }
+@utility raw-link {
+  text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px;
+  &:hover { color: var(--burgundy); }
+}
+
+/* Bottle glass */
+@utility glass {
+  background: linear-gradient(160deg, var(--glass-tint), oklch(0.95 0.02 140 / 0.25));
+  backdrop-filter: blur(16px) saturate(130%);
+  border: 1px solid oklch(0.6 0.05 160 / 0.35);
+  box-shadow: inset 0 1px 0 var(--glass-edge), inset 1px 0 0 oklch(1 0 0 / 0.35), 0 8px 30px -18px oklch(0.3 0.06 160 / 0.5);
+  overflow: hidden;
+  &::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(105deg, transparent 40%, oklch(1 0 0 / 0.28) 50%, transparent 60%);
+    background-size: 250% 100%; animation: shimmer 11s ease-in-out infinite;
+  }
+}
+@keyframes shimmer { 0% { background-position: 130% 0; } 60%, 100% { background-position: -130% 0; } }
+
+/* Orenburg shawl lace */
+@utility lace-divider {
+  height: 10px; border: 0;
+  background-image:
+    radial-gradient(circle at 5px 5px, transparent 2.4px, oklch(0.62 0.01 90 / 0.6) 2.6px, oklch(0.62 0.01 90 / 0.6) 3.1px, transparent 3.3px),
+    linear-gradient(oklch(0.62 0.01 90 / 0.45), oklch(0.62 0.01 90 / 0.45));
+  background-size: 10px 10px, 100% 1px; background-repeat: repeat-x, no-repeat; background-position: 0 0, 0 50%;
+}
+@utility lace-border {
+  border: 1px dashed oklch(0.6 0.01 90 / 0.55); outline: 1px solid oklch(0.6 0.01 90 / 0.25); outline-offset: 3px;
+}
+@utility lace-loading {
+  background-image: radial-gradient(circle, oklch(0.6 0.01 90 / 0.35) 1px, transparent 1.6px);
+  background-size: 8px 8px; animation: lace 3s linear infinite;
+}
+@keyframes lace { to { background-position: 8px 8px; } }
+
+/* Wall carpet ornament */
+@utility carpet-bg {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cg fill='none' stroke-width='2'%3E%3Cpath d='M48 6 L90 48 L48 90 L6 48Z' stroke='%237a2e34'/%3E%3Cpath d='M48 24 L72 48 L48 72 L24 48Z' stroke='%23b08a3c'/%3E%3Cpath d='M48 38 L58 48 L48 58 L38 48Z' fill='%235d7a95' stroke='none'/%3E%3Cpath d='M0 0 L12 12 M96 0 L84 12 M0 96 L12 84 M96 96 L84 84' stroke='%235d7a95'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 96px 96px;
+}
+@utility fade-in { animation: fadein 1.4s ease both; }
+@keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
+
+@utility glass-hover {
+  transition: filter 0.6s ease, transform 0.6s ease;
+  &:hover { filter: contrast(1.04) saturate(0.95) blur(0.2px); transform: scale(1.006) skewX(-0.3deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+/* Full-colour wall carpet for header/footer */
+@utility carpet-rich {
+  background-color: var(--carpet-red);
+  background-image: url("./assets/carpet.jpg");
+  background-size: auto 100%;
+  background-repeat: repeat-x;
+  background-position: center;
+  border-top: 4px solid var(--carpet-burgundy);
+  border-bottom: 4px solid var(--carpet-burgundy);
+}
+@utility carpet-plate {
+  background: var(--carpet-cream); color: var(--foreground);
+  border: 2px solid var(--carpet-ochre); outline: 2px solid var(--carpet-burgundy);
+}
+
+/* Bottle header glass */
+@utility bottle-glass {
+  background: linear-gradient(180deg, oklch(0.97 0.012 175 / 0.55) 0%, oklch(0.9 0.02 170 / 0.35) 45%, oklch(0.86 0.025 165 / 0.45) 100%);
+  backdrop-filter: blur(14px) saturate(140%);
+  filter: drop-shadow(0 10px 14px oklch(0.35 0.03 170 / 0.22));
+}
+
+/* Lettering printed directly on the bottle's red paper label. */
+.gallery-lettering, .gallery-caption {
+  font-family: var(--font-bottle-label); font-weight: 700; letter-spacing: 0; text-transform: none;
+}
+.hero-video-control { color: var(--bottle-label-ink); width: 44px; height: 44px; }
+.hero-video-control svg { width: 28px; height: 28px; filter: drop-shadow(0 1px 2px var(--foreground)); }
+.bottle-header { height: min(15.615vw, 179.88px); }
+.bottle-header-scene {
+  max-width: 1152px; height: 100%;
+}
+.bottle-header-image {
+  height: 100%; position: absolute; inset: 0;
+  transition: opacity 650ms ease-in-out; object-fit: fill;
+}
+.bottle-header[data-hidden="true"] .bottle-header-scene { visibility: hidden; }
+.back-to-header { width: 48px; height: 48px; }
+.back-to-header svg { width: 30px; height: 30px; }
+.bottle-neck-name {
+  position: absolute; left: 8.5%; top: 29%; width: 21%; transform: translateY(-50%);
+  font-family: var(--font-bottle-label); color: var(--bottle-name-ink);
+  font-weight: 800; font-size: 24px; line-height: 1.05; text-align: center; letter-spacing: 0; text-transform: uppercase;
+  transition: top 700ms ease-in-out, left 700ms ease-in-out, width 700ms ease-in-out, font-size 700ms ease-in-out;
+}
+.bottle-label-nav {
+  position: absolute; left: 42%; right: 10%; top: 44%; transform: translateY(-50%);
+  display: flex; align-items: center; justify-content: space-evenly; gap: 10px;
+  transition: top 700ms ease-in-out, left 700ms ease-in-out, right 700ms ease-in-out;
+}
+.bottle-label-link {
+  font-family: var(--font-bottle-label); font-weight: 800; font-size: 24px; line-height: 1.2;
+  color: var(--bottle-label-ink); letter-spacing: 0; text-transform: uppercase;
+  transition: opacity 180ms ease, font-size 700ms ease-in-out, color 700ms ease-in-out; padding: 8px 0;
+}
+.bottle-label-link:hover { opacity: 0.8; }
+.bottle-social { color: var(--bottle-label-ink); width: 28px; height: 32px; padding: 0; }
+.bottle-social svg { width: 22px; height: 22px; }
+.acquire-bottle {
+  position: relative; display: block; width: 100%; max-width: 380px;
+  height: auto; aspect-ratio: 2163 / 396; padding: 0;
+  font-family: var(--font-bottle-label); font-weight: 800;
+}
+.acquire-bottle img { display: block; width: 100%; height: 100%; }
+.purchase-action {
+  width: 100%; min-height: 56px; height: auto; padding: 12px 20px;
+  border-radius: 999px; font-family: var(--font-bottle-label);
+  font-size: 20px; font-weight: 700; line-height: 1.35; white-space: normal;
+}
+.purchase-primary {
+  background: var(--purchase-red); color: var(--purchase-cream);
+  border: 3px solid var(--purchase-cream);
+}
+.purchase-primary:hover { background: var(--purchase-red); filter: brightness(0.92); }
+.purchase-primary:disabled { opacity: 0.7; }
+.purchase-secondary {
+  background: var(--purchase-glass); color: var(--foreground);
+  border: 1px solid var(--purchase-glass-edge); backdrop-filter: blur(12px);
+}
+.purchase-secondary:hover { background: var(--purchase-glass); filter: brightness(0.97); }
+.acquire-bottle span {
+  position: absolute; left: 42%; right: 10%; top: 50%; transform: translateY(-50%);
+  color: var(--bottle-label-ink); font-size: 24px; line-height: 1; text-transform: uppercase;
+}
+.bottle-label-link:focus-visible, .bottle-neck-name:focus-visible {
+  outline: 2px solid currentColor; outline-offset: 4px;
+}
+@media (max-width: 767px) {
+  .bottle-header { height: 128px; }
+  .bottle-neck-name { left: 8.5%; top: 29%; width: 21%; font-size: 18px; text-transform: none; }
+  .bottle-label-nav { left: 42%; right: 10%; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0 5px; text-align: center; justify-items: center; }
+  .bottle-label-link { font-size: 18px; text-transform: none; padding: 7px 0; }
+}
+
+/* Legacy liquid treatment available for other glass surfaces. */
+@utility liquid-item {
+  position: relative; overflow: hidden; border-radius: 999px; padding: 0.35rem 0.9rem;
+  & .liquid { position: absolute; inset: 0; transform: translateY(105%); pointer-events: none;
+    background:
+      radial-gradient(120% 60% at 50% 0%, oklch(1 0 0 / 0.7), transparent 40%),
+      linear-gradient(180deg, oklch(0.92 0.03 170 / 0.75), oklch(0.82 0.04 170 / 0.6));
+    border-radius: 40% 45% 0 0 / 18% 22% 0 0; }
+  & .bubble { position: absolute; bottom: -6px; width: 4px; height: 4px; border-radius: 999px;
+    border: 1px solid oklch(1 0 0 / 0.9); background: oklch(1 0 0 / 0.35); opacity: 0; pointer-events: none; }
+  &:hover .liquid { animation: slosh 800ms ease-out forwards; }
+  &:hover .bubble { animation: rise 850ms ease-out forwards; }
+  &:hover .bubble:nth-child(3) { animation-delay: 120ms; }
+  &:hover .bubble:nth-child(4) { animation-delay: 240ms; }
+  &[data-status="active"] .liquid, &.is-active .liquid { transform: translateY(48%); animation: none; }
+  & > .label { position: relative; z-index: 1; }
+}
+@keyframes slosh {
+  0% { transform: translateY(105%) skewY(0deg); }
+  45% { transform: translateY(40%) skewY(-6deg); }
+  70% { transform: translateY(55%) skewY(4deg); }
+  100% { transform: translateY(50%) skewY(0deg); }
+}
+@keyframes rise {
+  0% { opacity: 0; transform: translateY(0); }
+  20% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-34px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .liquid-item .liquid, .liquid-item .bubble { display: none; }
+  .liquid-item:hover > .label { text-decoration: underline; text-underline-offset: 4px; }
+}
+
+/* Unframed lettering shares the bottle label's type and cream ink. */
+.carpet-footer-content {
+  color: var(--footer-ink); font-family: var(--font-bottle-label);
+  text-shadow: var(--footer-text-shadow); letter-spacing: 0;
+}
+.footer-signup {
+  --footer-ink: var(--bottle-name-ink);
+  --footer-text-shadow: none;
+  color: var(--footer-ink);
+  text-shadow: none;
+  display: flex; align-items: flex-end; gap: 40px; width: 100%;
+  padding: 28px 32px; border: 1px solid var(--footer-form-edge); border-radius: 4px;
+  background: var(--footer-form-glass); backdrop-filter: blur(4px);
+}
+.footer-email-label { display: flex; flex: 1; flex-direction: column; gap: 18px; min-width: 0; }
+.footer-signup-title { font-size: 40px; line-height: 1.2; font-weight: 800; }
+.footer-email {
+  width: 100%; background: transparent; color: var(--footer-ink);
+  border: 0; border-bottom: 1px solid var(--footer-ink); border-radius: 0;
+  padding: 12px 0; font-size: 22px; line-height: 1.4;
+  text-shadow: var(--footer-text-shadow);
+}
+.footer-email::placeholder { color: var(--footer-ink); opacity: 0.85; }
+.footer-email:focus-visible { outline: 2px solid var(--footer-ink); outline-offset: 6px; }
+.footer-join {
+  height: auto; padding: 0 0 5px; color: var(--footer-ink);
+  font-family: var(--font-bottle-label); font-size: 64px; font-weight: 800;
+  line-height: 1.05; text-transform: uppercase; letter-spacing: 0;
+  text-shadow: var(--footer-text-shadow);
+}
+.footer-join:focus-visible { outline: 2px solid var(--footer-ink); outline-offset: 6px; }
+.footer-signature { display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; }
+.footer-artist { font-size: 36px; line-height: 1.2; font-weight: 800; text-transform: uppercase; }
+.footer-location { font-size: 18px; line-height: 1.4; font-weight: 600; }
+@media (max-width: 767px) {
+  .footer-signup { flex-direction: column; align-items: stretch; gap: 22px; padding: 24px; }
+  .footer-signup-title { font-size: 32px; }
+  .footer-email { font-size: 18px; }
+  .footer-join { align-self: flex-end; font-size: 56px; }
+  .footer-artist { font-size: 28px; }
+}
+
+/* Whole-carpet footer */
+@utility carpet-border-band {
+  background-color: var(--carpet-cream);
+  background-image:
+    radial-gradient(circle at 50% 50%, var(--carpet-red) 0 4px, transparent 4.5px),
+    radial-gradient(circle at 0 50%, var(--carpet-burgundy) 0 6px, transparent 6.5px),
+    radial-gradient(circle at 100% 50%, var(--carpet-burgundy) 0 6px, transparent 6.5px),
+    linear-gradient(45deg, transparent 42%, var(--carpet-ochre) 42% 58%, transparent 58%),
+    linear-gradient(-45deg, transparent 42%, var(--carpet-ochre) 42% 58%, transparent 58%);
+  background-size: 28px 28px;
+}
+
+/* Animated carpet footer */
+@utility carpet-scene {
+  aspect-ratio: 1505 / 1045;
+  width: max(100%, 680px * 1.44);
+}
+@utility carpet-morph { animation: morph 32s ease-in-out infinite; }
+@keyframes morph { 0%, 38% { opacity: 0; } 50%, 80% { opacity: 1; } 94%, 100% { opacity: 0; } }
+@utility carpet-monster { opacity: 0; animation: monster 32s ease-in-out infinite; }
+@keyframes monster { 0%, 24% { opacity: 0; } 36%, 40% { opacity: 1; } 52%, 72% { opacity: 0; } 84%, 87% { opacity: 1; } 98%, 100% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .carpet-monster, .carpet-morph { animation: none; } }
+@utility lamp-glow {
+  position: absolute; left: 82%; top: 64%; width: 15%; height: 22%; pointer-events: none;
+  border-radius: 50%; filter: blur(28px);
+  background: radial-gradient(closest-side, oklch(0.98 0.15 95), oklch(0.92 0.16 88 / 0.6) 60%, transparent);
+  mix-blend-mode: screen; opacity: 0; animation: lamp 12s ease-in-out infinite;
+}
+@keyframes lamp {
+  0%, 38% { opacity: 0; }
+  40% { opacity: 0.8; } 41% { opacity: 0.2; } 42.5% { opacity: 1; }
+  78% { opacity: 1; } 84%, 100% { opacity: 0; }
+}
