@@ -3,6 +3,7 @@ import { toast } from "sonner";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetTrigger } from "@/components/ui/sheet";
 import type { Work } from "@/data/works";
 import { Button } from "@/components/ui/button";
+import { sendForm, SEND_FAILED } from "@/lib/send-form";
 const bottle = { url: "/media/acquire-whole-bottle.webp" };
 
 export function AcquireSheet({ work }: { work: Work }) {
@@ -37,7 +38,12 @@ export function AcquireSheet({ work }: { work: Work }) {
         </div>
         {asking && (
           <form className="relative z-10 flex flex-col gap-4 p-4"
-            onSubmit={(e) => { e.preventDefault(); setSending(true); setTimeout(() => { setSending(false); setOpen(false); setAsking(false); toast("Thank you — I'll reply soon."); }, 900); }}>
+            onSubmit={async (e) => {
+              e.preventDefault(); const f = new FormData(e.currentTarget); setSending(true);
+              const ok = await sendForm("Artwork enquiry", { artwork: `${work.title} (${work.year})`, price: work.price, name: String(f.get("name") ?? ""), email: String(f.get("email") ?? ""), message: String(f.get("message") ?? "") });
+              setSending(false);
+              if (ok) { setOpen(false); setAsking(false); toast("Thank you — I'll reply soon."); } else toast(SEND_FAILED);
+            }}>
             {[["name", "Your name", "text"], ["email", "Email", "email"]].map(([n, l, t]) => (
               <label key={n} className="flex flex-col gap-1">
                 <span className="text-lg">{l}</span>

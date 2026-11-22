@@ -2,6 +2,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { ARTIST } from "@/data/works";
 import { Button } from "@/components/ui/button";
+import { sendForm, SEND_FAILED } from "@/lib/send-form";
 
 export { BottleHeader as SiteHeader } from "./bottle-header";
 import { CarpetFooter } from "./carpet-footer";
@@ -12,13 +13,16 @@ export function Carpet({ className = "" }: { className?: string }) {
 
 function CollectorsSignup() {
   const [email, setEmail] = useState("");
+  const [sending, setSending] = useState(false);
   return (
     <form
       className="footer-signup"
-      onSubmit={(e) => {
+      onSubmit={async (e) => {
         e.preventDefault();
-        setEmail("");
-        toast("You're on the collectors' list. Thank you.");
+        setSending(true);
+        const ok = await sendForm("Collectors' list", { email });
+        setSending(false);
+        if (ok) { setEmail(""); toast("You're on the collectors' list. Thank you."); } else toast(SEND_FAILED);
       }}
     >
       <label className="footer-email-label">
@@ -26,7 +30,7 @@ function CollectorsSignup() {
         <input required type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="your@email.com"
           autoComplete="email" aria-label="Email for the collectors’ list" className="footer-email" />
       </label>
-      <Button type="submit" variant="lettering" className="footer-join">Join</Button>
+      <Button type="submit" variant="lettering" disabled={sending} className="footer-join">{sending ? "…" : "Join"}</Button>
     </form>
   );
 }

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { toast } from "sonner";
+import { sendForm, SEND_FAILED } from "@/lib/send-form";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -22,7 +23,12 @@ function Contact() {
     <div className="mx-auto grid max-w-6xl gap-12 px-5 py-16 md:grid-cols-[1fr_1.2fr]">
       <h1 className="text-[40px] font-extrabold leading-[0.9] md:mt-10 md:text-[56px]">Contact</h1>
       <form className="flex flex-col gap-5"
-        onSubmit={(e) => { e.preventDefault(); const f = e.currentTarget; setSending(true); setTimeout(() => { setSending(false); f.reset(); toast("Thank you — I'll reply soon."); }, 900); }}>
+        onSubmit={async (e) => {
+          e.preventDefault(); const f = e.currentTarget; const d = new FormData(f); setSending(true);
+          const ok = await sendForm("Contact", { name: String(d.get("name") ?? ""), email: String(d.get("email") ?? ""), message: String(d.get("message") ?? "") });
+          setSending(false);
+          if (ok) { f.reset(); toast("Thank you — I'll reply soon."); } else toast(SEND_FAILED);
+        }}>
         {[["name", "Your name", "text"], ["email", "Email", "email"]].map(([n, l, t]) => (
           <label key={n} className="flex flex-col gap-1">
             <span className="font-label text-[15px]">{l}</span>
