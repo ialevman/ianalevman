@@ -25,7 +25,7 @@ function NavItem({ to, label, exact, className = "bottle-label-link", onClick }:
 const INSTAGRAM = "https://www.instagram.com/ia_levman?evlk=MWZsbjZrbmF6d3ZvaQ%3D%3D&utm_source=qr";
 const TELEGRAM = "https://t.me/ialevman";
 
-/** The real "Zastolnaya" bottle lying on its side: the name is printed in the label's red band, menu lettering sits on the glass. */
+/** The real "Zastolnaya" bottle lying on its side: the name sits on the small neck label, the menu (or burger on mobile) on the plain red label. */
 export function BottleHeader() {
   const [hidden, setHidden] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -64,13 +64,10 @@ export function BottleHeader() {
         <Link to="/" aria-label={ARTIST} className="bottle-band-name pointer-events-auto">
           <span>{ARTIST}</span>
         </Link>
-        <nav aria-label="Main navigation" className="bottle-glass-nav pointer-events-auto">
-          <div className="bottle-glass-neck">{NAV.slice(0, 2).map((n) => <NavItem key={n.to} {...n} />)}</div>
-          <div className="bottle-glass-shoulder">{NAV.slice(2).map((n) => <NavItem key={n.to} {...n} />)}</div>
-          <div className="bottle-glass-base">
-            <Button asChild variant="lettering" size="icon" className="bottle-social"><a href={INSTAGRAM} target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram"><Instagram aria-hidden /></a></Button>
-            <Button asChild variant="lettering" size="icon" className="bottle-social"><a href={TELEGRAM} target="_blank" rel="noopener noreferrer" aria-label="Telegram" title="Telegram"><Send aria-hidden /></a></Button>
-          </div>
+        <nav aria-label="Main navigation" className="bottle-label-nav pointer-events-auto">
+          {NAV.map((n) => <NavItem key={n.to} {...n} />)}
+          <Button asChild variant="lettering" size="icon" className="bottle-social"><a href={INSTAGRAM} target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram"><Instagram aria-hidden /></a></Button>
+          <Button asChild variant="lettering" size="icon" className="bottle-social"><a href={TELEGRAM} target="_blank" rel="noopener noreferrer" aria-label="Telegram" title="Telegram"><Send aria-hidden /></a></Button>
         </nav>
         <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
           <SheetTrigger asChild>

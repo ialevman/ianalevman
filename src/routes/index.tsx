@@ -30,7 +30,7 @@ function Index() {
   return (
     <div>
       <div className="mt-6 md:mt-10"><HeroVideo /></div>
-      <p className="gallery-lettering mx-auto mt-6 max-w-6xl px-5 text-center text-lg">
+      <p className="mx-auto mt-4 max-w-6xl px-5 text-center font-normal text-sm md:text-base" style={{ fontFamily: "var(--font-bottle-label)" }}>
         Video performance: Mirror in the Mirror, 2026
       </p>
 
