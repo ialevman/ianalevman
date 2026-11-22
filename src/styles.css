@@ -240,8 +240,18 @@
   transition: opacity 650ms ease-in-out; object-fit: fill;
 }
 .bottle-header[data-hidden="true"] .bottle-header-scene { visibility: hidden; }
-.back-to-header { width: 48px; height: 48px; }
-.back-to-header svg { width: 30px; height: 30px; }
+/* Back-to-top as a tiny carpet: burgundy field, cream and navy borders, so it stands out on the carpet footer. */
+.back-to-header {
+  width: 52px; height: 52px; border-radius: 2px;
+  background: #9b1c1c; color: #f6e7c8;
+  border: 3px solid #f6e7c8;
+  box-shadow: 0 0 0 3px #1d2747, 0 0 0 5px #f6e7c8, 0 8px 18px rgba(0, 0, 0, 0.45);
+  outline: 1px dashed rgba(246, 231, 200, 0.7); outline-offset: -8px;
+  transition: background-color 200ms ease, transform 200ms ease;
+}
+.back-to-header:hover { background: #1d2747; color: #f6e7c8; transform: translateY(-2px); }
+.back-to-header:focus-visible { outline: 2px solid #f6e7c8; outline-offset: 4px; }
+.back-to-header svg { width: 26px; height: 26px; stroke-width: 2.5; }
 .bottle-neck-name {
   position: absolute; left: 8.5%; top: 29%; width: 21%; transform: translateY(-50%);
   font-family: var(--font-bottle-label); color: var(--bottle-name-ink);

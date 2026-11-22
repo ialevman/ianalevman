@@ -67,7 +67,7 @@ export function BottleHeader() {
       </div>
     </header>
     {hidden && (
-      <Button variant="lettering" size="icon" className="back-to-header fixed bottom-6 right-4 z-50 bg-background text-foreground md:right-6"
+      <Button variant="lettering" size="icon" className="back-to-header fixed bottom-6 right-4 z-50 md:right-6"
         aria-label="Back to top" title="Back to top"
         onClick={() => window.scrollTo({ top: 0, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" })}>
         <ArrowUp aria-hidden />
