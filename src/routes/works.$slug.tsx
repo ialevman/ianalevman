@@ -54,9 +54,13 @@ function WorkPage() {
         </div>
         <p className="mt-6 text-xl font-normal leading-relaxed">{work.medium}. {work.text}</p>
         <div className="mt-10">
-          {work.available ? (
+          {work.onRequest ? (
+            <Button asChild variant="lettering" className="h-auto p-0 text-2xl font-bold underline underline-offset-4">
+              <a href={`mailto:ialevman@gmail.com?subject=${encodeURIComponent(`About "${work.title}"`)}`}>Ask about this work</a>
+            </Button>
+          ) : work.available ? (
             <>
-              <p className="mb-5 text-2xl font-bold">{work.onRequest ? "Price on request" : work.price}</p>
+              <p className="mb-5 text-2xl font-bold">{work.price}</p>
               <AcquireSheet work={work} />
             </>
           ) : (
