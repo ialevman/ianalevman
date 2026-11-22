@@ -437,3 +437,35 @@
   40% { opacity: 0.8; } 41% { opacity: 0.2; } 42.5% { opacity: 1; }
   78% { opacity: 1; } 84%, 100% { opacity: 0; }
 }
+
+/* ---- Press: newspaper cuttings ---- */
+.press-clipping {
+  background: #f3ecdc; color: #2a211b; padding: 18px 18px 22px;
+  box-shadow: 0 1px 0 #e3d8c2, 0 10px 24px oklch(0.3 0.03 40 / 0.18);
+  clip-path: polygon(0 1%, 4% 0, 12% 0.8%, 22% 0, 35% 0.6%, 48% 0, 60% 0.9%, 74% 0.2%, 86% 0.8%, 100% 0, 99.4% 20%, 100% 45%, 99.3% 70%, 100% 100%, 88% 99.2%, 72% 100%, 58% 99.4%, 41% 100%, 27% 99.3%, 12% 100%, 0 99.4%, 0.6% 70%, 0 45%, 0.7% 20%);
+  transition: transform 200ms ease;
+}
+.press-clipping:hover { transform: rotate(0deg) translateY(-3px); }
+.press-kicker {
+  display: flex; justify-content: space-between; gap: 12px; padding-bottom: 8px; margin-bottom: 12px;
+  border-bottom: 3px double #2a211b; font-family: var(--font-label); font-size: 15px; letter-spacing: 0.08em; text-transform: uppercase;
+}
+.press-image { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; filter: sepia(0.25) contrast(1.05) saturate(0.85); }
+.press-kind { margin-top: 12px; font-family: var(--font-label); font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.7; }
+.press-headline { margin-top: 4px; font-family: var(--font-bottle-label); font-weight: 800; font-size: 26px; line-height: 1.15; }
+.press-translation { margin-top: 4px; font-style: italic; font-size: 15px; opacity: 0.75; }
+.press-lead { margin-top: 10px; font-family: Georgia, serif; font-size: 16px; line-height: 1.5; column-count: 1; }
+.press-more { display: inline-block; margin-top: 12px; font-family: var(--font-label); font-size: 15px; letter-spacing: 0.08em; text-transform: uppercase; }
+@media (max-width: 767px) { .press-headline { font-size: 22px; } }
+
+/* ---- CV ---- */
+.cv-heading { margin: 48px 0 16px; font-family: var(--font-bottle-label); font-weight: 800; font-size: 24px; }
+.cv-rows { display: grid; gap: 14px; }
+.cv-row { display: grid; grid-template-columns: 6.5rem 1fr; gap: 16px; font-size: 18px; line-height: 1.4; }
+.cv-year { font-family: var(--font-label); font-size: 18px; opacity: 0.7; }
+.cv-what { display: block; font-weight: 600; }
+.cv-where { display: block; opacity: 0.8; }
+@media (max-width: 767px) { .cv-row { grid-template-columns: 5rem 1fr; font-size: 16px; } }
+
+/* ---- About: mirrored portrait pair ---- */
+.about-diptych { display: grid; grid-template-columns: 1fr 1fr; gap: 0; max-width: 900px; margin-inline: auto; }
