@@ -396,11 +396,13 @@
 .footer-artist { font-size: 36px; line-height: 1.2; font-weight: 800; text-transform: uppercase; }
 .footer-location { font-size: 18px; line-height: 1.4; font-weight: 600; }
 @media (max-width: 767px) {
-  .footer-signup { flex-direction: column; align-items: stretch; gap: 22px; padding: 24px; }
-  .footer-signup-title { font-size: 32px; }
-  .footer-email { font-size: 18px; }
-  .footer-join { align-self: flex-end; font-size: 56px; }
-  .footer-artist { font-size: 28px; }
+  /* Compact form on phones so the carpet (and its monster) stays visible. */
+  .footer-signup { flex-direction: row; flex-wrap: wrap; align-items: flex-end; gap: 10px 14px; padding: 14px 16px; }
+  .footer-email-label { gap: 8px; }
+  .footer-signup-title { font-size: 22px; }
+  .footer-email { font-size: 15px; }
+  .footer-join { font-size: 26px; padding-bottom: 2px; }
+  .footer-artist { font-size: 22px; }
 }
 
 /* Whole-carpet footer */
