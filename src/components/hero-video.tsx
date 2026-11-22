@@ -16,11 +16,11 @@ export function HeroVideo() {
     else { v.pause(); bg.current?.pause(); setPlaying(false); }
   };
   return (
-    <div data-hero-video className="relative h-[85vh] min-h-[480px] w-full overflow-hidden bg-foreground">
+    <div data-hero-video className="relative aspect-video w-full overflow-hidden bg-foreground md:aspect-auto md:h-[85vh] md:min-h-[480px]">
       <video ref={bg} src={video.url} autoPlay muted loop playsInline aria-hidden
-        className="absolute inset-0 h-full w-full scale-110 object-cover opacity-70 blur-2xl" />
+        className="absolute inset-0 hidden h-full w-full scale-110 object-cover opacity-70 blur-2xl md:block" />
       <video ref={ref} src={video.url} autoPlay muted loop playsInline
-        className="fade-in relative mx-auto h-full w-auto object-contain" style={{ maskImage: "linear-gradient(to right, transparent, black 38%, black 62%, transparent)", WebkitMaskImage: "linear-gradient(to right, transparent, black 38%, black 62%, transparent)" }} />
+        className="hero-main-video fade-in relative mx-auto h-full w-full object-cover md:w-auto md:object-contain" style={{ maskImage: "linear-gradient(to right, transparent, black 38%, black 62%, transparent)", WebkitMaskImage: "linear-gradient(to right, transparent, black 38%, black 62%, transparent)" }} />
       <TooltipProvider delayDuration={200}>
         <div className="absolute bottom-4 left-4 flex gap-3">
           <Tooltip>

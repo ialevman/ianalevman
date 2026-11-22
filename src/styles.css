@@ -229,15 +229,16 @@
 .gallery-lettering, .gallery-caption {
   font-family: var(--font-bottle-label); font-weight: 700; letter-spacing: 0; text-transform: none;
 }
+@media (max-width: 767px) { .hero-main-video { mask-image: none !important; -webkit-mask-image: none !important; } }
 .hero-video-control { color: var(--bottle-label-ink); width: 44px; height: 44px; }
 .hero-video-control svg { width: 28px; height: 28px; filter: drop-shadow(0 1px 2px var(--foreground)); }
-.bottle-header { height: min(15.615vw, 179.88px); }
-.bottle-header-scene {
-  max-width: 1152px; height: 100%;
+.bottle-header {
+  --bw: min(1000px, calc(100vw - 32px));
+  height: calc(var(--bw) * 0.24177 + 12px); padding-top: 12px;
 }
+.bottle-header-scene { width: var(--bw); height: calc(var(--bw) * 0.24177); }
 .bottle-header-image {
-  height: 100%; position: absolute; inset: 0;
-  transition: opacity 650ms ease-in-out; object-fit: fill;
+  width: 100%; height: 100%; position: absolute; inset: 0;
 }
 .bottle-header[data-hidden="true"] .bottle-header-scene { visibility: hidden; }
 /* Back-to-top as a tiny carpet: burgundy field, cream and navy borders, so it stands out on the carpet footer. */
@@ -252,24 +253,37 @@
 .back-to-header:hover { background: #1d2747; color: #f6e7c8; transform: translateY(-2px); }
 .back-to-header:focus-visible { outline: 2px solid #f6e7c8; outline-offset: 4px; }
 .back-to-header svg { width: 26px; height: 26px; stroke-width: 2.5; }
-.bottle-neck-name {
-  position: absolute; left: 8.5%; top: 29%; width: 21%; transform: translateY(-50%);
-  font-family: var(--font-bottle-label); color: var(--bottle-name-ink);
-  font-weight: 800; font-size: 24px; line-height: 1.05; text-align: center; letter-spacing: 0; text-transform: uppercase;
-  transition: top 700ms ease-in-out, left 700ms ease-in-out, width 700ms ease-in-out, font-size 700ms ease-in-out;
+/* "IANA LEVMAN" printed where the label said ЗАСТОЛЬНАЯ: white serif, gold edge, dark-red shadow, turned with the bottle. */
+.bottle-band-name {
+  position: absolute; left: 58.1%; width: 5.8%; top: 4%; height: 92%;
+  display: flex; align-items: center; justify-content: center;
 }
-.bottle-label-nav {
-  position: absolute; left: 42%; right: 10%; top: 44%; transform: translateY(-50%);
-  display: flex; align-items: center; justify-content: space-evenly; gap: 10px;
-  transition: top 700ms ease-in-out, left 700ms ease-in-out, right 700ms ease-in-out;
+.bottle-band-name span {
+  display: block; transform: rotate(-90deg); white-space: nowrap;
+  font-family: var(--font-bottle-label); font-weight: 800; text-transform: uppercase; letter-spacing: 0.01em;
+  font-size: calc(var(--bw) * 0.0265); line-height: 1; color: #fffaf0;
+  -webkit-text-stroke: calc(var(--bw) * 0.0011) #c9973c; paint-order: stroke fill;
+  text-shadow: 0.05em 0.07em 0 #5b0f16, 0 0 0.02em #c9973c;
 }
+.bottle-glass-nav > div { position: absolute; display: flex; align-items: center; justify-content: space-evenly; }
+.bottle-glass-neck { left: 9.5%; width: 17%; top: 30%; height: 40%; }
+.bottle-glass-shoulder { left: 33%; width: 11%; top: 18%; height: 64%; flex-direction: column; justify-content: center !important; gap: 2px; }
+.bottle-glass-base { left: 86%; width: 12%; top: 25%; height: 50%; }
 .bottle-label-link {
-  font-family: var(--font-bottle-label); font-weight: 800; font-size: 24px; line-height: 1.2;
-  color: var(--bottle-label-ink); letter-spacing: 0; text-transform: uppercase;
-  transition: opacity 180ms ease, font-size 700ms ease-in-out, color 700ms ease-in-out; padding: 8px 0;
+  font-family: var(--font-bottle-label); font-weight: 800; font-size: clamp(14px, calc(var(--bw) * 0.021), 21px); line-height: 1.2;
+  color: var(--bottle-name-ink); letter-spacing: 0.02em; text-transform: uppercase;
+  transition: opacity 180ms ease; padding: 4px 2px;
 }
-.bottle-label-link:hover { opacity: 0.8; }
-.bottle-social { color: var(--bottle-label-ink); width: 28px; height: 32px; padding: 0; }
+.bottle-label-link:hover { opacity: 0.7; }
+.bottle-label-link.is-active { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.bottle-burger { display: none; }
+.bottle-menu { background: var(--background); padding: 28px 20px 24px; }
+.bottle-menu .bottle-menu-link.text-xl { font-size: 20px; }
+.bottle-menu-link {
+  font-family: var(--font-bottle-label); font-weight: 800; font-size: 32px; line-height: 1.3;
+  color: var(--bottle-name-ink); text-transform: uppercase; padding: 6px 0;
+}
+.bottle-social { color: var(--bottle-name-ink); width: 28px; height: 32px; padding: 0; }
 .bottle-social svg { width: 22px; height: 22px; }
 .acquire-bottle {
   position: relative; display: block; width: 100%; max-width: 380px;
@@ -297,14 +311,17 @@
   position: absolute; left: 42%; right: 10%; top: 50%; transform: translateY(-50%);
   color: var(--bottle-label-ink); font-size: 24px; line-height: 1; text-transform: uppercase;
 }
-.bottle-label-link:focus-visible, .bottle-neck-name:focus-visible {
+.bottle-label-link:focus-visible, .bottle-band-name:focus-visible {
   outline: 2px solid currentColor; outline-offset: 4px;
 }
 @media (max-width: 767px) {
-  .bottle-header { height: 128px; }
-  .bottle-neck-name { left: 8.5%; top: 29%; width: 21%; font-size: 18px; text-transform: none; }
-  .bottle-label-nav { left: 42%; right: 10%; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0 5px; text-align: center; justify-items: center; }
-  .bottle-label-link { font-size: 18px; text-transform: none; padding: 7px 0; }
+  .bottle-header { padding-top: 8px; height: calc(var(--bw) * 0.24177 + 8px); }
+  .bottle-glass-nav { display: none; }
+  .bottle-burger {
+    display: inline-flex; position: absolute; left: 10%; width: 16%; top: 22%; height: 56%;
+    color: var(--bottle-name-ink);
+  }
+  .bottle-burger svg { width: 28px; height: 28px; stroke-width: 2.5; }
 }
 
 /* Legacy liquid treatment available for other glass surfaces. */

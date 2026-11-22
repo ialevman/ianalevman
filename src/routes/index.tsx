@@ -29,7 +29,7 @@ function Index() {
 
   return (
     <div>
-      <div className="mt-20 md:mt-32"><HeroVideo /></div>
+      <div className="mt-6 md:mt-10"><HeroVideo /></div>
       <p className="gallery-lettering mx-auto mt-6 max-w-6xl px-5 text-center text-lg">
         Video performance: Mirror in the Mirror, 2026
       </p>

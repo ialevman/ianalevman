@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "@tanstack/react-router";
 import { ARTIST } from "@/data/works";
-const half = { url: "/media/bottle-restored-cap.webp" };
-import { ArrowUp, Instagram, Send } from "lucide-react";
+const bottle = { url: "/media/bottle-zastolnaya.webp" };
+import { ArrowUp, Instagram, Menu, Send } from "lucide-react";
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { shouldHideBottle, shouldRenderBottle } from "@/lib/header-scroll";
 
@@ -13,17 +14,21 @@ const NAV = [
   { to: "/press", label: "Press", exact: false },
 ] as const;
 
-function NavItem({ to, label, exact }: { to: "/" | "/cv" | "/about" | "/press"; label: string; exact: boolean }) {
+function NavItem({ to, label, exact, className = "bottle-label-link", onClick }: { to: "/" | "/cv" | "/about" | "/press"; label: string; exact: boolean; className?: string; onClick?: () => void }) {
   return (
-    <Link to={to} activeOptions={{ exact }} className="bottle-label-link" activeProps={{ className: "is-active" }}>
+    <Link to={to} activeOptions={{ exact }} className={className} activeProps={{ className: "is-active" }} onClick={onClick}>
       {label}
     </Link>
   );
 }
 
-/** Half-bottle body with its full cap and neck restored; lettering stays accessible over the transparent image. */
+const INSTAGRAM = "https://www.instagram.com/ia_levman?evlk=MWZsbjZrbmF6d3ZvaQ%3D%3D&utm_source=qr";
+const TELEGRAM = "https://t.me/ialevman";
+
+/** The real "Zastolnaya" bottle lying on its side: the name is printed in the label's red band, menu lettering sits on the glass. */
 export function BottleHeader() {
   const [hidden, setHidden] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const pathname = useLocation({ select: (location) => location.pathname });
 
   useEffect(() => {
@@ -54,16 +59,34 @@ export function BottleHeader() {
   return (
     <>
     <header data-hidden={hidden} aria-hidden={hidden} className="bottle-header pointer-events-none sticky top-0 z-40">
-      <div className="bottle-header-scene relative mx-auto w-full">
-        <img src={half.url} alt="" aria-hidden width={2171} height={339} className="bottle-header-image block w-full" />
-        <Link to="/" aria-label={ARTIST} className="bottle-neck-name pointer-events-auto">
-          {ARTIST}
+      <div className="bottle-header-scene relative mx-auto">
+        <img src={bottle.url} alt="" aria-hidden width={2279} height={551} className="bottle-header-image block" />
+        <Link to="/" aria-label={ARTIST} className="bottle-band-name pointer-events-auto">
+          <span>{ARTIST}</span>
         </Link>
-        <nav aria-label="Main navigation" className="bottle-label-nav pointer-events-auto">
-          {NAV.map((n) => <NavItem key={n.to} {...n} />)}
-          <Button asChild variant="lettering" size="icon" className="bottle-social"><a href="https://www.instagram.com/ia_levman?evlk=MWZsbjZrbmF6d3ZvaQ%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram"><Instagram aria-hidden /></a></Button>
-          <Button asChild variant="lettering" size="icon" className="bottle-social"><a href="https://t.me/ialevman" target="_blank" rel="noopener noreferrer" aria-label="Telegram" title="Telegram"><Send aria-hidden /></a></Button>
+        <nav aria-label="Main navigation" className="bottle-glass-nav pointer-events-auto">
+          <div className="bottle-glass-neck">{NAV.slice(0, 2).map((n) => <NavItem key={n.to} {...n} />)}</div>
+          <div className="bottle-glass-shoulder">{NAV.slice(2).map((n) => <NavItem key={n.to} {...n} />)}</div>
+          <div className="bottle-glass-base">
+            <Button asChild variant="lettering" size="icon" className="bottle-social"><a href={INSTAGRAM} target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram"><Instagram aria-hidden /></a></Button>
+            <Button asChild variant="lettering" size="icon" className="bottle-social"><a href={TELEGRAM} target="_blank" rel="noopener noreferrer" aria-label="Telegram" title="Telegram"><Send aria-hidden /></a></Button>
+          </div>
         </nav>
+        <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
+          <SheetTrigger asChild>
+            <Button variant="lettering" size="icon" className="bottle-burger pointer-events-auto" aria-label="Open menu"><Menu aria-hidden /></Button>
+          </SheetTrigger>
+          <SheetContent side="top" className="bottle-menu">
+            <SheetTitle className="sr-only">Menu</SheetTitle>
+            <nav aria-label="Mobile navigation" className="flex flex-col gap-1">
+              {NAV.map((n) => <NavItem key={n.to} {...n} className="bottle-menu-link" onClick={() => setMenuOpen(false)} />)}
+            </nav>
+            <div className="mt-4 flex gap-4">
+              <a href={INSTAGRAM} target="_blank" rel="noopener noreferrer" className="bottle-menu-link text-xl">Instagram</a>
+              <a href={TELEGRAM} target="_blank" rel="noopener noreferrer" className="bottle-menu-link text-xl">Telegram</a>
+            </div>
+          </SheetContent>
+        </Sheet>
       </div>
     </header>
     {hidden && (
