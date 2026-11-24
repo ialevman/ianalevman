@@ -56,9 +56,9 @@ function Index() {
 
         <div className="mx-auto mt-12 grid max-w-6xl gap-x-14 gap-y-20 px-5 md:grid-cols-2">
           {list.map((w, i) => (
-            <Link key={w.slug} to="/works/$slug" params={{ slug: w.slug }} className={`group block ${offsets[i] ?? ""}`}>
-              <img src={w.image} alt={w.title} width={w.w} height={w.h} loading="lazy" className={`fade-in glass-hover h-auto w-full ${w.category === "Works on Paper" ? (w.w > w.h ? "aspect-[29/21] object-cover" : "aspect-[21/29] object-cover") : ""}`} />
-              <div className={`mt-3 flex flex-wrap items-baseline gap-x-3 ${i % 2 ? "justify-end" : ""}`}>
+            <Link key={w.slug} to="/works/$slug" params={{ slug: w.slug }} className={`group block ${tab === "Video" ? "" : offsets[i % offsets.length] ?? ""}`}>
+              <img src={w.image} alt={w.title} width={w.w} height={w.h} loading="lazy" className={`fade-in glass-hover h-auto w-full ${w.category === "Works on Paper" ? (w.w > w.h ? "aspect-[29/21] object-cover" : "aspect-[21/29] object-cover") : w.category === "Video" ? "aspect-video object-cover" : ""}`} />
+              <div className={`mt-3 flex flex-wrap items-baseline gap-x-3 ${i % 2 && tab !== "Video" ? "justify-end" : ""}`}>
                 <span className="text-xl font-medium group-hover:underline">{w.title}</span>
                 <Label className="gallery-caption">{w.year} · {w.category}{w.available ? "" : " · Sold"}{onlyAvailable && w.price ? ` · ${w.price}` : ""}</Label>
               </div>
