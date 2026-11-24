@@ -2,7 +2,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { ARTIST } from "@/data/works";
 import { Button } from "@/components/ui/button";
-import { sendForm, SEND_FAILED } from "@/lib/send-form";
+import { sendForm, SEND_FAILED, MAIL_OPENED } from "@/lib/send-form";
 
 export { BottleHeader as SiteHeader } from "./bottle-header";
 import { CarpetFooter } from "./carpet-footer";
@@ -34,8 +34,9 @@ function CollectorsSignup() {
         setSending(true);
         const ok = await sendForm("Collectors' list", { email });
         setSending(false);
-        if (ok) { setEmail(""); toast("You're on the collectors' list. Thank you."); }
-        else toast(SEND_FAILED, { action: { label: "Email instead", onClick: () => { window.location.href = `mailto:ialevman@gmail.com?subject=${encodeURIComponent("Collectors' list")}&body=${encodeURIComponent(`Please add me: ${email}`)}`; } } });
+        if (ok === "sent") { setEmail(""); toast("You're on the collectors' list. Thank you."); }
+        else if (ok === "mailto") { setEmail(""); toast(MAIL_OPENED); }
+        else toast(SEND_FAILED);
       }}
     >
       <label className="footer-email-label">

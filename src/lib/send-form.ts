@@ -11,31 +11,40 @@ export type FormKind = "Collectors' list" | "Artwork enquiry" | "Contact";
  * Web3Forms access key (public by design; get one free at web3forms.com with the inbox address).
  * When set, Web3Forms is used; otherwise FormSubmit. Either way a request never waits more than 12 s.
  */
-const WEB3FORMS_KEY = import.meta.env.VITE_WEB3FORMS_KEY as string | undefined;
+const WEB3FORMS_KEY = import.meta.env['VITE_WEB3FORMS_KEY'] as string | undefined;
 
-export async function sendForm(kind: FormKind, fields: Record<string, string>): Promise<boolean> {
-  const who = fields.email ? ` — ${fields.email}` : "";
+export type SendResult = "sent" | "mailto" | false;
+
+/** Opens the visitor's mail app with everything filled in; the subject keeps the "[ianalevman.com]" tag the inbox agent looks for. */
+function openMail(subject: string, fields: Record<string, string>, page: string) {
+  const body = Object.entries(fields).filter(([, v]) => v).map(([k, v]) => `${k}: ${v}`).join("\n") + (page ? `\n\n${page}` : "");
+  window.location.href = `mailto:${INBOX}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
+/**
+ * With a Web3Forms key the form is sent in the background; without one (the default) the visitor's
+ * mail app opens pre-filled, so nothing depends on a third-party form service.
+ */
+export async function sendForm(kind: FormKind, fields: Record<string, string>): Promise<SendResult> {
+  const who = fields['email'] ? ` — ${fields['email']}` : "";
   const subject = `[ianalevman.com] ${kind}${who}`;
   const page = typeof window !== "undefined" ? window.location.href : "";
+  if (!WEB3FORMS_KEY) { openMail(subject, fields, page); return "mailto"; }
   const ctl = new AbortController();
   const timer = setTimeout(() => ctl.abort(), 12000);
   try {
-    const [url, body] = WEB3FORMS_KEY
-      ? ["https://api.web3forms.com/submit", { access_key: WEB3FORMS_KEY, subject, from_name: "ianalevman.com", form: kind, page, ...fields, ...(fields.email ? { replyto: fields.email } : {}) }]
-      : [`https://formsubmit.co/ajax/${INBOX}`, { ...fields, form: kind, page, _subject: subject, _template: "table", _captcha: "false", ...(fields.email ? { _replyto: fields.email } : {}) }];
-    const res = await fetch(url, {
-      method: "POST",
-      signal: ctl.signal,
+    const res = await fetch("https://api.web3forms.com/submit", {
+      method: "POST", signal: ctl.signal,
       headers: { "Content-Type": "application/json", Accept: "application/json" },
-      body: JSON.stringify(body),
+      body: JSON.stringify({ access_key: WEB3FORMS_KEY, subject, from_name: "ianalevman.com", form: kind, page, ...fields, ...(fields['email'] ? { replyto: fields['email'] } : {}) }),
     });
     const data = (await res.json().catch(() => ({}))) as { success?: string | boolean };
-    return res.ok && String(data.success) === "true";
-  } catch {
-    return false;
-  } finally {
-    clearTimeout(timer);
-  }
+    if (res.ok && String(data.success) === "true") return "sent";
+  } catch { /* fall through to mail app */ } finally { clearTimeout(timer); }
+  openMail(subject, fields, page);
+  return "mailto";
 }
+
+export const MAIL_OPENED = "Your email app has opened with everything filled in — just press Send.";
 
 export const SEND_FAILED = `Sorry, that didn't go through. Please write to ${INBOX}.`;

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { toast } from "sonner";
-import { sendForm, SEND_FAILED } from "@/lib/send-form";
+import { sendForm, SEND_FAILED, MAIL_OPENED } from "@/lib/send-form";
 import { PinnedHeading } from "@/components/site-chrome";
 
 export const Route = createFileRoute("/contact")({
@@ -29,7 +29,7 @@ function Contact() {
           e.preventDefault(); const f = e.currentTarget; const d = new FormData(f); setSending(true);
           const ok = await sendForm("Contact", { name: String(d.get("name") ?? ""), email: String(d.get("email") ?? ""), message: String(d.get("message") ?? "") });
           setSending(false);
-          if (ok) { f.reset(); toast("Thank you — I'll reply soon."); } else toast(SEND_FAILED);
+          if (ok) { f.reset(); toast(ok === "sent" ? "Thank you — I'll reply soon." : MAIL_OPENED); } else toast(SEND_FAILED);
         }}>
         {[["name", "Your name", "text"], ["email", "Email", "email"]].map(([n, l, t]) => (
           <label key={n} className="flex flex-col gap-1">

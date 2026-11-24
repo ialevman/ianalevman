@@ -3,7 +3,7 @@ import { toast } from "sonner";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetTrigger } from "@/components/ui/sheet";
 import type { Work } from "@/data/works";
 import { Button } from "@/components/ui/button";
-import { sendForm, SEND_FAILED } from "@/lib/send-form";
+import { sendForm, SEND_FAILED, MAIL_OPENED } from "@/lib/send-form";
 const bottle = { url: "/media/acquire-whole-bottle.webp" };
 
 export function AcquireSheet({ work }: { work: Work }) {
@@ -42,7 +42,7 @@ export function AcquireSheet({ work }: { work: Work }) {
               e.preventDefault(); const f = new FormData(e.currentTarget); setSending(true);
               const ok = await sendForm("Artwork enquiry", { artwork: `${work.title} (${work.year})`, price: work.price, name: String(f.get("name") ?? ""), email: String(f.get("email") ?? ""), message: String(f.get("message") ?? "") });
               setSending(false);
-              if (ok) { setOpen(false); setAsking(false); toast("Thank you — I'll reply soon."); } else toast(SEND_FAILED);
+              if (ok) { setOpen(false); setAsking(false); toast(ok === "sent" ? "Thank you — I'll reply soon." : MAIL_OPENED); } else toast(SEND_FAILED);
             }}>
             {[["name", "Your name", "text"], ["email", "Email", "email"]].map(([n, l, t]) => (
               <label key={n} className="flex flex-col gap-1">
