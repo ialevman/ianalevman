@@ -57,7 +57,7 @@ function CV() {
       <h2 className="cv-heading">Education</h2>
       <Rows items={EDUCATION} />
       <h2 className="cv-heading">Press</h2>
-      <p className="text-lg">Jupiter · ERR, ETV+, Raadio 4, Saarte Hääl — <Link to="/press" className="underline underline-offset-4">see Press</Link>.</p>
+      <p className="text-lg">Jupiter · ERR, ETV+ Horizont, Radio 4, Voice of the Islands — <Link to="/press" className="underline underline-offset-4">see Press</Link>.</p>
     </section>
   );
 }
