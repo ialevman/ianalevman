@@ -15,6 +15,11 @@ describe("bottle handoff to Artworks", () => {
   it("does not hide the bottle on pages without Artworks", () => {
     expect(shouldHideBottle(null)).toBe(false);
   });
+
+  it("hides the bottle once the section reaches the bottle's lower edge, so they never overlap", () => {
+    expect(shouldHideBottle(181, 180)).toBe(false);
+    expect(shouldHideBottle(180, 180)).toBe(true);
+  });
   it("never shows the header bottle on an artwork page", () => {
     expect(shouldRenderBottle("/works/breath-on-a-window")).toBe(false);
     expect(shouldRenderBottle("/works/thread")).toBe(false);

@@ -32,7 +32,8 @@ export function BottleHeader() {
     let frame = 0;
     const update = () => {
       const artworks = document.querySelector<HTMLElement>("[data-artworks-start]");
-      setHidden(shouldHideBottle(artworks?.getBoundingClientRect().top ?? null));
+      const bottle = document.querySelector<HTMLElement>(".bottle-header");
+      setHidden(shouldHideBottle(artworks?.getBoundingClientRect().top ?? null, bottle?.offsetHeight ?? 0));
     };
     const schedule = () => {
       cancelAnimationFrame(frame);

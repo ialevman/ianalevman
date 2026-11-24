@@ -16,9 +16,12 @@ export const Route = createFileRoute("/press")({
 /** Each publication shown as a newspaper cutting: outlet and date as the kicker, the outlet's own preview image, headline, lead. */
 function Press() {
   return (
-    <section className="mx-auto max-w-6xl px-5 py-16">
-      <h1 className="gallery-lettering text-[32px] md:text-[44px]">Press</h1>
-      <div className="mt-10 grid gap-x-10 gap-y-14 md:grid-cols-2">
+    /* Same hand-off as the Artworks gallery: when this section reaches the top, the bottle hides and "Press" stays pinned. */
+    <section data-artworks-start className="mt-12 pb-16">
+      <div className="sticky top-0 z-40 bg-background">
+        <h1 className="gallery-lettering mx-auto max-w-6xl px-5 py-4 text-[32px] md:py-5 md:text-[44px]">Press</h1>
+      </div>
+      <div className="mx-auto mt-8 grid max-w-6xl px-5 gap-x-10 gap-y-14 md:grid-cols-2">
         {PRESS.map((p, i) => (
           <a key={p.url} href={p.url} target="_blank" rel="noopener noreferrer" lang={p.lang}
             className={`press-clipping group block ${i % 2 ? "md:mt-16 md:rotate-[0.8deg]" : "md:-rotate-[0.6deg]"}`}>
