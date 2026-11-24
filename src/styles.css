@@ -191,9 +191,9 @@
 @utility carpet-bg {
   background-color: transparent;
   background-image:
-    radial-gradient(circle at 50% 45%, transparent 0 38%, #7a2e34 78%),
-    linear-gradient(to right, #4a1a1f 0 1px, transparent 1px),
-    linear-gradient(to bottom, #4a1a1f 0 1px, transparent 1px);
+    radial-gradient(circle at 50% 45%, transparent 0 38%, #e9dcc4 78%),
+    linear-gradient(to right, #e3d3b6 0 1px, transparent 1px),
+    linear-gradient(to bottom, #e3d3b6 0 1px, transparent 1px);
   background-size: 6px 6px, 6px 6px, 6px 6px;
 }
 @utility fade-in { animation: fadein 1.4s ease both; }

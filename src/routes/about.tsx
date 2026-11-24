@@ -29,7 +29,7 @@ const TEXT = [
 function About() {
   return (
     <div data-artworks-start className="relative mt-12 pb-16">
-      <Carpet className="opacity-[0.14]" />
+      <Carpet className="opacity-50 saturate-100" />
       {/* 900px portrait + 2×20px padding, so the title starts exactly at the picture's left edge */}
       <PinnedHeading title="About" width="max-w-[940px]" />
       <div className="relative mx-auto max-w-5xl px-5 pt-6">
@@ -40,7 +40,6 @@ function About() {
         </div>
         <div className="mx-auto mt-12 max-w-2xl space-y-6 text-lg leading-relaxed md:text-xl">
           {TEXT.map((p, i) => <p key={i}>{p}</p>)}
-          <hr className="lace-divider" />
         </div>
       </div>
     </div>
