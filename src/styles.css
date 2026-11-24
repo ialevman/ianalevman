@@ -76,6 +76,8 @@
   --font-display: "Bricolage Grotesque", ui-sans-serif, sans-serif;
   --font-label: "Barlow Condensed", ui-sans-serif, sans-serif;
   --font-bottle-label: "Roboto Slab", Georgia, serif;
+  /* Site UI: a tight neo-grotesk, fashion-house style (black, uppercase titles, small uppercase controls). */
+  --font-ui: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
   --color-bottle: var(--bottle);
   --color-burgundy: var(--burgundy);
   --color-ochre: var(--ochre);
@@ -150,7 +152,7 @@
 }
 
 @layer base {
-  body { font-family: var(--font-display); font-size: 18px; line-height: 1.55; }
+  body { font-family: var(--font-ui); font-size: 17px; line-height: 1.5; letter-spacing: -0.005em; }
   a { text-underline-offset: 3px; }
 }
 
@@ -237,8 +239,13 @@
 
 /* Lettering printed directly on the bottle's red paper label. */
 .gallery-lettering, .gallery-caption {
-  font-family: var(--font-bottle-label); font-weight: 700; letter-spacing: 0; text-transform: none;
+  font-family: var(--font-ui); font-weight: 400; letter-spacing: -0.01em; text-transform: none;
 }
+/* Page titles: heavy, uppercase, tightly tracked. */
+.page-title { font-family: var(--font-ui); font-weight: 800; text-transform: uppercase; letter-spacing: -0.035em; line-height: 0.95; }
+/* Small uppercase controls: tabs, filters, commands. */
+.ui-control { font-family: var(--font-ui); font-weight: 400; font-size: 14px; letter-spacing: 0.06em; text-transform: uppercase; }
+.gallery-caption { font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.6; }
 .hero-video-control { color: var(--bottle-label-ink); width: 44px; height: 44px; }
 .hero-video-control svg { width: 28px; height: 28px; filter: drop-shadow(0 1px 2px var(--foreground)); }
 .bottle-header { height: min(15.615vw, 179.88px); }
@@ -468,14 +475,14 @@
 }
 .press-image { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; filter: sepia(0.25) contrast(1.05) saturate(0.85); }
 .press-kind { margin-top: 12px; font-family: var(--font-label); font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.7; }
-.press-headline { margin-top: 4px; font-family: var(--font-bottle-label); font-weight: 800; font-size: 26px; line-height: 1.15; }
+.press-headline { margin-top: 4px; font-family: var(--font-ui); font-weight: 700; letter-spacing: -0.02em; font-size: 26px; line-height: 1.15; }
 .press-translation { margin-top: 4px; font-style: italic; font-size: 15px; opacity: 0.75; }
 .press-lead { margin-top: 10px; font-family: Georgia, serif; font-size: 16px; line-height: 1.5; column-count: 1; }
 .press-more { display: inline-block; margin-top: 12px; font-family: var(--font-label); font-size: 15px; letter-spacing: 0.08em; text-transform: uppercase; }
 @media (max-width: 767px) { .press-headline { font-size: 22px; } }
 
 /* ---- CV ---- */
-.cv-heading { margin: 48px 0 16px; font-family: var(--font-bottle-label); font-weight: 800; font-size: 24px; }
+.cv-heading { margin: 48px 0 16px; font-family: var(--font-ui); font-weight: 700; font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; }
 .cv-rows { display: grid; gap: 14px; }
 .cv-row { display: grid; grid-template-columns: 6.5rem 1fr; gap: 16px; font-size: 18px; line-height: 1.4; }
 .cv-year { font-family: var(--font-label); font-size: 18px; opacity: 0.7; }

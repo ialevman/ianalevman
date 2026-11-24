@@ -38,16 +38,16 @@ function Index() {
       <section data-artworks-start className="gallery-lettering mt-20">
         <div className="artworks-header sticky top-0 z-40 bg-background">
         <div className="mx-auto max-w-6xl px-5 py-4 md:py-5">
-        <h1 className="text-[32px] font-bold md:text-[44px]">Artworks</h1>
-        <div className="mt-3 flex flex-wrap items-center justify-between gap-x-6 gap-y-4">
-          <div role="tablist" aria-label="Work categories" className="flex flex-wrap gap-x-5 gap-y-2 md:gap-x-6">
+        <h1 className="page-title text-[40px] md:text-[64px]">Artworks</h1>
+        <div className="mt-3 flex flex-wrap items-center justify-between gap-x-6 gap-y-0">
+          <div role="tablist" aria-label="Work categories" className="flex flex-wrap gap-x-4 gap-y-0 md:gap-x-6">
             {(["All", ...CATEGORIES] as Tab[]).map((t) => (
               <Button variant="lettering" key={t} role="tab" aria-selected={tab === t} onClick={() => setTab(t)}
-                className={`h-auto min-h-11 whitespace-normal p-0 text-xl font-bold md:text-2xl ${tab === t ? "underline decoration-2 underline-offset-4" : "hover:underline"}`}>{t}</Button>
+                className={`ui-control h-auto min-h-11 whitespace-normal p-0 ${tab === t ? "underline decoration-1 underline-offset-[6px]" : "opacity-60 hover:opacity-100"}`}>{t}</Button>
             ))}
           </div>
-          <label className="flex min-h-11 cursor-pointer items-center gap-3 text-xl md:text-2xl">
-            <input type="checkbox" checked={onlyAvailable} onChange={(e) => setOnlyAvailable(e.target.checked)} className="size-6 shrink-0 accent-primary" />
+          <label className="ui-control flex min-h-11 cursor-pointer items-center gap-2">
+            <input type="checkbox" checked={onlyAvailable} onChange={(e) => setOnlyAvailable(e.target.checked)} className="size-4 shrink-0 accent-[color:var(--foreground)]" />
             Available works
           </label>
         </div>
@@ -59,7 +59,7 @@ function Index() {
             <Link key={w.slug} to="/works/$slug" params={{ slug: w.slug }} className={`group block ${tab === "Video" ? "" : offsets[i % offsets.length] ?? ""}`}>
               <img src={w.image} alt={w.title} width={w.w} height={w.h} loading="lazy" className={`fade-in glass-hover h-auto w-full ${w.category === "Works on Paper" ? (w.w > w.h ? "aspect-[29/21] object-cover" : "aspect-[21/29] object-cover") : w.category === "Video" ? "aspect-video object-cover" : ""}`} />
               <div className={`mt-3 flex flex-wrap items-baseline gap-x-3 ${i % 2 && tab !== "Video" ? "justify-end" : ""}`}>
-                <span className="text-xl font-medium group-hover:underline">{w.title}</span>
+                <span className="text-[15px] font-normal group-hover:underline">{w.title}</span>
                 <Label className="gallery-caption">{w.year} · {w.category}{w.available ? "" : " · Sold"}{onlyAvailable && w.price ? ` · ${w.price}` : ""}</Label>
               </div>
             </Link>

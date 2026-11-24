@@ -54,14 +54,14 @@ function WorkPage() {
         ))}
       </div>
       <aside className="md:sticky md:top-10 md:self-start">
-        <Button asChild variant="lettering" className="h-auto p-0 text-xl font-normal md:text-2xl"><Link to="/"><ArrowLeft aria-hidden />All works</Link></Button>
+        <Button asChild variant="lettering" className="ui-control h-auto p-0"><Link to="/"><ArrowLeft aria-hidden />All works</Link></Button>
         <div className="mt-8">
-          <h1 className="text-[32px] font-bold leading-tight md:text-[40px]">{work.title}</h1>
-          <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-xl font-normal md:text-2xl">
+          <h1 className="page-title text-[32px] md:text-[44px]">{work.title}</h1>
+          <div className="ui-control mt-4 flex flex-wrap gap-x-5 gap-y-1 opacity-70">
             <span>{work.year}</span><span>{work.size}</span><span>{work.category}</span>
           </div>
         </div>
-        <p className="mt-6 text-xl font-normal leading-relaxed">{work.medium}. {work.text}</p>
+        <p className="mt-6 text-base font-normal leading-relaxed">{work.medium}. {work.text}</p>
         <div className="mt-10">
           {work.onRequest ? (
             <Button asChild variant="lettering" className="h-auto p-0 text-2xl font-bold underline underline-offset-4">

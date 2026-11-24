@@ -18,7 +18,7 @@ export function Carpet({ className = "", opacity = 0.05 }: { className?: string;
 export function PinnedHeading({ title, width = "max-w-6xl" }: { title: string; width?: string }) {
   return (
     <div className="sticky top-0 z-40 bg-background">
-      <h1 className={`gallery-lettering mx-auto ${width} px-5 py-4 text-[32px] md:py-5 md:text-[44px]`}>{title}</h1>
+      <h1 className={`page-title mx-auto ${width} px-5 py-4 text-[40px] md:py-5 md:text-[64px]`}>{title}</h1>
     </div>
   );
 }
