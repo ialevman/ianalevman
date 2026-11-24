@@ -39,6 +39,12 @@ function WorkPage() {
       <div className="grid gap-10">
         {work.privateVideo ? (
           <PrivateVideo slug={work.slug} title={work.title} poster={work.image} w={work.w} h={work.h} />
+        ) : work.youtube ? (
+          <div className="relative aspect-video w-full self-start bg-foreground">
+            <iframe src={`https://www.youtube-nocookie.com/embed/${work.youtube}?rel=0&modestbranding=1`} title={work.title} loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen
+              className="absolute inset-0 h-full w-full border-0" />
+          </div>
         ) : work.watch ? (
           <a href={work.watch.url} target="_blank" rel="noopener noreferrer" className="group relative block self-start" aria-label={`${work.watch.label}: ${work.title}`}>
             <img src={work.image} alt={work.title} width={work.w} height={work.h} className="fade-in h-auto w-full" />
