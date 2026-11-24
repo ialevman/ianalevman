@@ -245,6 +245,16 @@
 .page-title { font-family: var(--font-ui); font-weight: 800; text-transform: uppercase; letter-spacing: -0.035em; line-height: 0.95; }
 /* Small uppercase controls: tabs, filters, commands. */
 .ui-control { font-family: var(--font-ui); font-weight: 400; font-size: 14px; letter-spacing: 0.06em; text-transform: uppercase; }
+/* Primary command button: outlined in the notebook ink, fills on hover. */
+.ui-button {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  height: 48px; padding: 0 28px; border: 1px solid var(--action-ink); border-radius: 0;
+  background: transparent; color: var(--action-ink);
+  font-family: var(--font-ui); font-weight: 500; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+.ui-button:hover { background: var(--action-ink); color: var(--paper); }
+.ui-button:disabled { opacity: 0.5; }
 .gallery-caption { font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.6; }
 .hero-video-control { color: var(--bottle-label-ink); width: 44px; height: 44px; }
 .hero-video-control svg { width: 28px; height: 28px; filter: drop-shadow(0 1px 2px var(--foreground)); }
@@ -398,8 +408,9 @@
   box-shadow: 0 10px 24px oklch(0.2 0.04 250 / 0.25);
 }
 .footer-email-label { display: flex; flex: 1; flex-direction: column; gap: 18px; min-width: 0; }
-.footer-signup-title { font-size: 40px; line-height: 1.2; font-weight: 800; }
+.footer-signup-title { font-family: var(--font-ui); font-size: 40px; line-height: 1; font-weight: 800; text-transform: uppercase; letter-spacing: -0.03em; }
 .footer-email {
+  font-family: var(--font-ui);
   width: 100%; background: transparent; color: var(--footer-ink);
   border: 0; border-bottom: 1px solid var(--footer-ink); border-radius: 0;
   padding: 12px 0; font-size: 22px; line-height: 1.4;
@@ -409,8 +420,8 @@
 .footer-email:focus-visible { outline: 2px solid var(--footer-ink); outline-offset: 6px; }
 .footer-join {
   height: auto; padding: 0 0 5px; color: var(--footer-ink);
-  font-family: var(--font-bottle-label); font-size: 64px; font-weight: 800;
-  line-height: 1.05; text-transform: uppercase; letter-spacing: 0;
+  font-family: var(--font-ui); font-size: 64px; font-weight: 800;
+  line-height: 1.05; text-transform: uppercase; letter-spacing: -0.03em;
   text-shadow: var(--footer-text-shadow);
 }
 .footer-join:focus-visible { outline: 2px solid var(--footer-ink); outline-offset: 6px; }

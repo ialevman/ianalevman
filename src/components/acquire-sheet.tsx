@@ -20,11 +20,11 @@ export function AcquireSheet({ work }: { work: Work }) {
       </SheetTrigger>
       <SheetContent className="gallery-lettering glass w-full overflow-y-auto border-l sm:max-w-md [&>button]:top-2 [&>button]:right-2 [&>button]:z-20 [&>button]:flex [&>button]:size-11 [&>button]:items-center [&>button]:justify-center [&>button>svg]:size-8">
         <SheetHeader>
-          <SheetTitle className="text-4xl font-bold">Acquire</SheetTitle>
+          <SheetTitle className="page-title text-4xl">Acquire</SheetTitle>
           <SheetDescription className="text-xl font-normal text-foreground">{work.title}, {work.year}</SheetDescription>
         </SheetHeader>
         <div className="relative z-10 mt-6 space-y-3 px-4 text-xl">
-          <p className="text-2xl font-bold">{work.price}</p>
+          <p className="text-xl font-medium">{work.price}</p>
           <p className="font-normal">{work.medium} · {work.size}</p>
           <p className="text-lg font-normal text-muted-foreground">Shipping worldwide, insured, quoted separately. Certificate of authenticity included.</p>
         </div>
@@ -54,7 +54,7 @@ export function AcquireSheet({ work }: { work: Work }) {
               <span className="text-lg">Question</span>
               <textarea name="message" rows={3} className="border border-input bg-transparent p-2 text-lg focus:outline-ring" />
             </label>
-            <Button type="submit" variant="lettering" disabled={sending} className="h-auto self-start p-0 text-2xl">{sending ? "Sending…" : "Send"}</Button>
+            <Button type="submit" variant="lettering" disabled={sending} className="ui-button self-start">{sending ? "Sending…" : "Send"}</Button>
           </form>
         )}
       </SheetContent>
