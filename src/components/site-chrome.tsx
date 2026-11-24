@@ -2,7 +2,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { ARTIST } from "@/data/works";
 import { Button } from "@/components/ui/button";
-import { sendForm, SEND_FAILED, MAIL_OPENED } from "@/lib/send-form";
+import { joinCollectorsList, SEND_FAILED } from "@/lib/send-form";
 
 export { BottleHeader as SiteHeader } from "./bottle-header";
 import { CarpetFooter } from "./carpet-footer";
@@ -32,10 +32,9 @@ function CollectorsSignup() {
       onSubmit={async (e) => {
         e.preventDefault();
         setSending(true);
-        const ok = await sendForm("Collectors' list", { email });
+        const ok = await joinCollectorsList(email);
         setSending(false);
-        if (ok === "sent") { setEmail(""); toast("You're on the collectors' list. Thank you."); }
-        else if (ok === "mailto") { setEmail(""); toast(MAIL_OPENED); }
+        if (ok) { setEmail(""); toast("You're on the collectors' list. Thank you."); }
         else toast(SEND_FAILED);
       }}
     >

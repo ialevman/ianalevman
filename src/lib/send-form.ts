@@ -15,6 +15,30 @@ const WEB3FORMS_KEY = import.meta.env['VITE_WEB3FORMS_KEY'] as string | undefine
 
 export type SendResult = "sent" | "mailto" | false;
 
+/**
+ * Collectors' list goes straight into a Google Form (responses land in a Google Sheet the artist owns).
+ * Google Forms doesn't allow CORS, so the request is fire-and-forget ("no-cors"); a network failure still throws.
+ */
+const COLLECTORS_FORM = "https://docs.google.com/forms/d/e/1FAIpQLSd_-kswtZsOy2CYmYnAOcih4_Z-xjf0gRpRffV_6cWGxfUX1g/formResponse";
+const COLLECTORS_EMAIL_FIELD = "entry.810651354";
+
+export async function joinCollectorsList(email: string): Promise<boolean> {
+  const ctl = new AbortController();
+  const timer = setTimeout(() => ctl.abort(), 12000);
+  try {
+    await fetch(COLLECTORS_FORM, {
+      method: "POST", mode: "no-cors", signal: ctl.signal,
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({ [COLLECTORS_EMAIL_FIELD]: email.trim() }).toString(),
+    });
+    return true;
+  } catch {
+    return false;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 /** Opens the visitor's mail app with everything filled in; the subject keeps the "[ianalevman.com]" tag the inbox agent looks for. */
 function openMail(subject: string, fields: Record<string, string>, page: string) {
   const body = Object.entries(fields).filter(([, v]) => v).map(([k, v]) => `${k}: ${v}`).join("\n") + (page ? `\n\n${page}` : "");
