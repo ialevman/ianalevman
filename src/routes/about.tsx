@@ -29,9 +29,9 @@ const TEXT = [
 function About() {
   return (
     <div className="relative">
-      <Carpet className="opacity-[0.06]" />
+      <Carpet className="opacity-[0.14]" />
       <div className="relative mx-auto max-w-5xl px-5 py-16">
-        <h1 className="text-[40px] font-extrabold leading-[0.9] md:text-[56px]">About</h1>
+        <h1 className="mx-auto max-w-[900px] text-[40px] font-extrabold leading-[0.9] md:text-[56px]">About</h1>
         {/* The same portrait twice, the right one mirrored, so the two look towards each other. */}
         <div className="about-diptych mt-10" aria-label="Portrait of Iana Levman">
           <img src="/media/about-portrait.webp" alt="Iana Levman" width={1200} height={1200} className="h-auto w-full" />
