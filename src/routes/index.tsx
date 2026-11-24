@@ -19,8 +19,6 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-// Vertical stagger only: horizontal margins would shrink some cards and make same-size works look different sizes.
-const offsets = ["", "md:mt-24", "md:mt-8", "md:-mt-6", "md:mt-16", "md:mt-2"];
 type Tab = "All" | Category;
 
 function Index() {
@@ -54,11 +52,12 @@ function Index() {
         </div>
         </div>
 
-        <div className="mx-auto mt-12 grid max-w-6xl gap-x-14 gap-y-20 px-5 md:grid-cols-2">
-          {list.map((w, i) => (
-            <Link key={w.slug} to="/works/$slug" params={{ slug: w.slug }} className={`group block ${tab === "Video" ? "" : offsets[i % offsets.length] ?? ""}`}>
-              <img src={w.image} alt={w.title} width={w.w} height={w.h} loading="lazy" className={`fade-in glass-hover h-auto w-full ${w.category === "Works on Paper" ? (w.w > w.h ? "aspect-[29/21] object-cover" : "aspect-[21/29] object-cover") : w.category === "Video" ? "aspect-video object-cover" : ""}`} />
-              <div className={`mt-3 flex flex-wrap items-baseline gap-x-3 ${i % 2 && tab !== "Video" ? "justify-end" : ""}`}>
+        {/* One even column: every work at the full width of the page. */}
+        <div className="mx-auto mt-12 grid max-w-6xl gap-y-20 px-5 md:gap-y-28">
+          {list.map((w) => (
+            <Link key={w.slug} to="/works/$slug" params={{ slug: w.slug }} className="group block">
+              <img src={w.image} alt={w.title} width={w.w} height={w.h} loading="lazy" className={`fade-in glass-hover h-auto w-full ${w.category === "Video" ? "aspect-video object-cover" : ""}`} />
+              <div className="mt-3 flex flex-wrap items-baseline gap-x-3">
                 <span className="text-[15px] font-normal group-hover:underline">{w.title}</span>
                 <Label className="gallery-caption">{w.year} · {w.category}{w.available ? "" : " · Sold"}{onlyAvailable && w.price ? ` · ${w.price}` : ""}</Label>
               </div>
