@@ -463,11 +463,9 @@
   aspect-ratio: 1505 / 1045;
   width: max(100%, 680px * 1.44);
 }
-@utility carpet-morph { animation: morph 32s ease-in-out infinite; }
-@keyframes morph { 0%, 38% { opacity: 0; } 50%, 80% { opacity: 1; } 94%, 100% { opacity: 0; } }
 @utility carpet-monster { opacity: 0; animation: monster 32s ease-in-out infinite; }
 @keyframes monster { 0%, 24% { opacity: 0; } 36%, 40% { opacity: 1; } 52%, 72% { opacity: 0; } 84%, 87% { opacity: 1; } 98%, 100% { opacity: 0; } }
-@media (prefers-reduced-motion: reduce) { .carpet-monster, .carpet-morph { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .carpet-monster { animation: none; } }
 @utility lamp-glow {
   position: absolute; left: 82%; top: 64%; width: 15%; height: 22%; pointer-events: none;
   border-radius: 50%; filter: blur(28px);
@@ -511,3 +509,9 @@
 
 /* ---- About: mirrored portrait pair ---- */
 .about-diptych { display: grid; grid-template-columns: 1fr 1fr; gap: 0; max-width: 900px; margin-inline: auto; }
+
+/* Collectors' list section on the home page: title left, email + Join right, divided by the notebook ruling. */
+.collectors-section {
+  display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px 48px;
+  border-top: 1px solid var(--ruling); padding-top: 40px;
+}

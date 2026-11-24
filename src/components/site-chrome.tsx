@@ -23,12 +23,14 @@ export function PinnedHeading({ title, width = "max-w-6xl" }: { title: string; w
   );
 }
 
-function CollectorsSignup() {
+/** Collectors' list as its own section (home page only). */
+export function CollectorsSignup() {
   const [email, setEmail] = useState("");
   const [sending, setSending] = useState(false);
   return (
+    <section className="mx-auto mt-8 max-w-6xl px-5">
     <form
-      className="footer-signup"
+      className="collectors-section"
       onSubmit={async (e) => {
         e.preventDefault();
         setSending(true);
@@ -38,23 +40,25 @@ function CollectorsSignup() {
         else toast(SEND_FAILED);
       }}
     >
-      <label className="footer-email-label">
-        <span className="footer-signup-title">Collectors’ list</span>
+      <div className="max-w-md">
+        <h2 className="page-title text-[32px] md:text-[44px]">Collectors’ list</h2>
+        <p className="mt-3 text-[15px] text-muted-foreground">New works and exhibitions, first. A few letters a year.</p>
+      </div>
+      <div className="flex w-full max-w-lg items-end gap-3">
         <input required type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="your@email.com"
-          autoComplete="email" aria-label="Email for the collectors’ list" className="footer-email" />
-      </label>
-      <Button type="submit" variant="lettering" disabled={sending} className="footer-join">{sending ? "…" : "Join"}</Button>
+          autoComplete="email" aria-label="Email for the collectors’ list"
+          className="h-12 min-w-0 flex-1 border-b border-[color:var(--ruling)] bg-transparent text-[15px] outline-none focus:border-[color:var(--action-ink)]" />
+        <button type="submit" disabled={sending} className="ui-button shrink-0">{sending ? "…" : "Join"}</button>
+      </div>
     </form>
+    </section>
   );
 }
 
 export function SiteFooter() {
   return (
     <CarpetFooter>
-      <div className="w-full max-w-3xl"><CollectorsSignup /></div>
-      <p className="footer-signature">
-        <span className="footer-location">© {new Date().getFullYear()} · {ARTIST}</span>
-      </p>
+      <p className="ui-control mt-6 text-center opacity-60">© {new Date().getFullYear()} · {ARTIST}</p>
     </CarpetFooter>
   );
 }

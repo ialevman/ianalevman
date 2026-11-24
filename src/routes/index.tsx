@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { works, CATEGORIES, type Category } from "@/data/works";
-import { Label } from "@/components/site-chrome";
+import { Label, CollectorsSignup } from "@/components/site-chrome";
 import { HeroVideo } from "@/components/hero-video";
 import { Button } from "@/components/ui/button";
 
@@ -78,6 +78,7 @@ function Index() {
           {list.length === 0 && <p className="text-muted-foreground">No works here yet.</p>}
         </div>
       </section>
+      <CollectorsSignup />
     </div>
   );
 }
