@@ -115,7 +115,7 @@ function PrivateVideo({ slug, title, poster, w, h }: { slug: string; title: stri
         <div className="flex gap-2">
           <input id="video-pw" type="password" inputMode="numeric" autoComplete="off" value={password} onChange={(e) => setPassword(e.target.value)}
             className="w-40 border-b-2 border-white bg-transparent px-1 py-1 text-center text-xl text-white outline-none placeholder:text-white/60" placeholder="Password" />
-          <button type="submit" disabled={busy} className="ui-button ml-3 h-10 border-white px-5 text-white hover:bg-white hover:text-black">{busy ? "…" : "Play"}</button>
+          <button type="submit" disabled={busy} className="ui-button ml-3 h-10 border-white px-5 text-white">{busy ? "…" : "Play"}</button>
         </div>
         {error && <p role="alert" className="text-base">Wrong password</p>}
       </form>
