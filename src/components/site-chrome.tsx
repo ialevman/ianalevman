@@ -7,8 +7,8 @@ import { sendForm, SEND_FAILED } from "@/lib/send-form";
 export { BottleHeader as SiteHeader } from "./bottle-header";
 import { CarpetFooter } from "./carpet-footer";
 
-export function Carpet({ className = "" }: { className?: string }) {
-  return <div aria-hidden className={`carpet-bg pointer-events-none absolute inset-0 opacity-[0.05] saturate-50 ${className}`} />;
+export function Carpet({ className = "", opacity = 0.05 }: { className?: string; opacity?: number }) {
+  return <div aria-hidden style={{ opacity }} className={`carpet-bg pointer-events-none absolute inset-0 ${className}`} />;
 }
 
 /**

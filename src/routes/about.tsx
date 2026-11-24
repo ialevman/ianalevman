@@ -29,7 +29,7 @@ const TEXT = [
 function About() {
   return (
     <div data-artworks-start className="relative mt-12 pb-16">
-      <Carpet className="opacity-50 saturate-100" />
+      <Carpet opacity={0.22} />
       {/* 900px portrait + 2×20px padding, so the title starts exactly at the picture's left edge */}
       <PinnedHeading title="About" width="max-w-[940px]" />
       <div className="relative mx-auto max-w-5xl px-5 pt-6">
