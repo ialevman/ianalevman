@@ -34,7 +34,8 @@ function CollectorsSignup() {
         setSending(true);
         const ok = await sendForm("Collectors' list", { email });
         setSending(false);
-        if (ok) { setEmail(""); toast("You're on the collectors' list. Thank you."); } else toast(SEND_FAILED);
+        if (ok) { setEmail(""); toast("You're on the collectors' list. Thank you."); }
+        else toast(SEND_FAILED, { action: { label: "Email instead", onClick: () => { window.location.href = `mailto:ialevman@gmail.com?subject=${encodeURIComponent("Collectors' list")}&body=${encodeURIComponent(`Please add me: ${email}`)}`; } } });
       }}
     >
       <label className="footer-email-label">

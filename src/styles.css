@@ -373,14 +373,20 @@
   color: var(--footer-ink); font-family: var(--font-bottle-label);
   text-shadow: var(--footer-text-shadow); letter-spacing: 0;
 }
+/* Collectors' list as a sheet of squared notebook paper: bluish paper, grid, lettering in the ruling's ink. */
 .footer-signup {
-  --footer-ink: var(--bottle-name-ink);
+  --footer-ink: oklch(0.45 0.07 245);
   --footer-text-shadow: none;
   color: var(--footer-ink);
   text-shadow: none;
   display: flex; align-items: flex-end; gap: 40px; width: 100%;
-  padding: 28px 32px; border: 1px solid var(--footer-form-edge); border-radius: 4px;
-  background: var(--footer-form-glass); backdrop-filter: blur(4px);
+  padding: 28px 32px; border: 1px solid var(--ruling); border-radius: 3px;
+  background-color: color-mix(in oklab, #eef3f7 92%, transparent);
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--ruling) 70%, transparent) 0 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--ruling) 70%, transparent) 0 1px, transparent 1px);
+  background-size: 19px 19px;
+  box-shadow: 0 10px 24px oklch(0.2 0.04 250 / 0.25);
 }
 .footer-email-label { display: flex; flex: 1; flex-direction: column; gap: 18px; min-width: 0; }
 .footer-signup-title { font-size: 40px; line-height: 1.2; font-weight: 800; }
