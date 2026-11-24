@@ -1,3 +1,4 @@
+import { useLocation } from "@tanstack/react-router";
 import { useState } from "react";
 import { toast } from "sonner";
 import { ARTIST } from "@/data/works";
@@ -56,6 +57,9 @@ export function CollectorsSignup() {
 }
 
 export function SiteFooter() {
+  // Individual work pages end with the work itself, no carpet.
+  const pathname = useLocation({ select: (l) => l.pathname });
+  if (pathname.startsWith("/works/")) return null;
   return (
     <CarpetFooter>
       <p className="ui-control mt-6 text-center opacity-60">© {new Date().getFullYear()} · {ARTIST}</p>
