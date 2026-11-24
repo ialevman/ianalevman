@@ -90,13 +90,17 @@
   --burgundy: oklch(0.43 0.09 20);
   --ochre: oklch(0.7 0.11 75);
   --dusty: oklch(0.62 0.05 240);
-  --background: oklch(1 0 0);
+  /* Squared-notebook palette: off-white paper, grey-blue ruling, fountain-pen ink. */
+  --paper: #fbfaf4;
+  --ruling: #b9c9d6;
+  --ink: oklch(0.38 0.09 258);
+  --background: var(--paper);
   --foreground: oklch(0.2 0.012 150);
-  --card: oklch(1 0 0);
+  --card: var(--paper);
   --card-foreground: oklch(0.2 0.012 150);
-  --popover: oklch(1 0 0);
+  --popover: var(--paper);
   --popover-foreground: oklch(0.2 0.012 150);
-  --primary: oklch(0.36 0.07 160);
+  --primary: var(--ink);
   --primary-foreground: oklch(0.96 0.014 85);
   --secondary: oklch(0.9 0.012 85);
   --secondary-foreground: oklch(0.2 0.012 150);
@@ -106,9 +110,9 @@
   --accent-foreground: oklch(0.96 0.014 85);
   --destructive: oklch(0.5 0.15 25);
   --destructive-foreground: oklch(0.96 0.014 85);
-  --border: oklch(0.8 0.012 100);
-  --input: oklch(0.8 0.012 100);
-  --ring: oklch(0.42 0.07 160);
+  --border: var(--ruling);
+  --input: var(--ruling);
+  --ring: var(--ink);
   --chart-1: var(--bottle); --chart-2: var(--burgundy); --chart-3: var(--ochre); --chart-4: var(--dusty); --chart-5: oklch(0.7 0 0);
   --sidebar: var(--card); --sidebar-foreground: var(--foreground); --sidebar-primary: var(--primary);
   --sidebar-primary-foreground: var(--primary-foreground); --sidebar-accent: var(--secondary);
@@ -127,7 +131,7 @@
   --purchase-glass: oklch(0.9 0.035 215 / 0.65);
   --purchase-glass-edge: oklch(0.72 0.05 215 / 0.6);
   --footer-ink: var(--bottle-label-ink);
-  --footer-form-glass: oklch(0.96 0.012 165 / 0.78);
+  --footer-form-glass: color-mix(in oklab, var(--paper) 82%, transparent);
   --footer-form-edge: var(--glass-edge);
   --footer-text-shadow: 0 2px 3px oklch(0.18 0.055 20 / 0.9), 0 0 12px oklch(0.18 0.055 20 / 0.7);
 }
