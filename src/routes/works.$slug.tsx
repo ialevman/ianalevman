@@ -41,7 +41,7 @@ function WorkPage() {
           <PrivateVideo slug={work.slug} title={work.title} poster={work.image} w={work.w} h={work.h} />
         ) : work.youtube ? (
           <div className="relative aspect-video w-full self-start bg-foreground">
-            <iframe src={`https://www.youtube-nocookie.com/embed/${work.youtube}?rel=0&modestbranding=1`} title={work.title} loading="lazy"
+            <iframe src={`https://www.youtube-nocookie.com/embed/${work.youtube}?rel=0&modestbranding=1&mute=1`} title={work.title} loading="lazy"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen
               className="absolute inset-0 h-full w-full border-0" />
           </div>
