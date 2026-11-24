@@ -18,26 +18,26 @@ export function AcquireSheet({ work }: { work: Work }) {
           <span>Acquire</span>
         </Button>
       </SheetTrigger>
-      <SheetContent className="gallery-lettering glass w-full overflow-y-auto border-l sm:max-w-md [&>button]:top-2 [&>button]:right-2 [&>button]:z-20 [&>button]:flex [&>button]:size-11 [&>button]:items-center [&>button]:justify-center [&>button>svg]:size-8">
+      <SheetContent className="gallery-lettering w-full overflow-y-auto border-l border-[color:var(--ruling)] bg-background sm:max-w-md [&>button]:top-3 [&>button]:right-3 [&>button]:z-20 [&>button]:flex [&>button]:size-11 [&>button]:items-center [&>button]:justify-center [&>button]:opacity-100 [&>button]:shadow-none [&>button]:ring-0 [&>button]:outline-none [&>button]:focus:ring-0 [&>button]:focus:ring-offset-0 [&>button]:focus:outline-none [&>button]:focus-visible:outline-none [&>button>svg]:size-7">
         <SheetHeader>
-          <SheetTitle className="page-title text-4xl">Acquire</SheetTitle>
-          <SheetDescription className="text-xl font-normal text-foreground">{work.title}, {work.year}</SheetDescription>
+          <SheetTitle className="page-title text-[32px]">Acquire</SheetTitle>
+          <SheetDescription className="text-[15px] font-normal text-foreground">{work.title}, {work.year}</SheetDescription>
         </SheetHeader>
-        <div className="relative z-10 mt-6 space-y-3 px-4 text-xl">
-          <p className="text-xl font-medium">{work.price}</p>
-          <p className="font-normal">{work.medium} · {work.size}</p>
-          <p className="text-lg font-normal text-muted-foreground">Shipping worldwide, insured, quoted separately. Certificate of authenticity included.</p>
+        <div className="relative z-10 mt-2 space-y-2 px-0 text-[15px]">
+          <p className="text-lg font-medium">{work.price}</p>
+          <p className="ui-control opacity-70">{work.medium} · {work.size}</p>
+          <p className="text-sm font-normal text-muted-foreground">Shipping worldwide, insured, quoted separately. Certificate of authenticity included.</p>
         </div>
-        <div className="relative z-10 mt-8 flex flex-col items-stretch gap-4 px-4">
+        <div className="relative z-10 mt-6 flex flex-col items-stretch gap-3">
           {work.paymentLink ? (
             <Button asChild variant="default" className="purchase-action purchase-primary"><a href={work.paymentLink} target="_blank" rel="noreferrer">Buy now</a></Button>
           ) : (
-            <Button disabled variant="default" className="purchase-action purchase-primary" title="Payment link not set up yet">Buy now — coming soon</Button>
+            <Button disabled variant="default" className="purchase-action purchase-primary" title="Payment link not set up yet">Buy now · coming soon</Button>
           )}
-          <Button variant="secondary" onClick={() => setAsking((a) => !a)} className="purchase-action purchase-secondary">Ask about this work</Button>
+          <Button variant="secondary" onClick={() => setAsking((a) => !a)} aria-expanded={asking} className="purchase-action purchase-secondary">Ask about this work</Button>
         </div>
         {asking && (
-          <form className="relative z-10 flex flex-col gap-4 p-4"
+          <form className="relative z-10 flex flex-col gap-4 py-4"
             onSubmit={async (e) => {
               e.preventDefault(); const f = new FormData(e.currentTarget); setSending(true);
               const ok = await sendForm("Artwork enquiry", { artwork: `${work.title} (${work.year})`, price: work.price, name: String(f.get("name") ?? ""), email: String(f.get("email") ?? ""), message: String(f.get("message") ?? "") });
@@ -46,13 +46,13 @@ export function AcquireSheet({ work }: { work: Work }) {
             }}>
             {[["name", "Your name", "text"], ["email", "Email", "email"]].map(([n, l, t]) => (
               <label key={n} className="flex flex-col gap-1">
-                <span className="text-lg">{l}</span>
-                <input required name={n} type={t} className="border-b border-foreground/40 bg-transparent py-2 text-lg outline-none focus:border-primary" />
+                <span className="ui-control opacity-70">{l}</span>
+                <input required name={n} type={t} className="border-b border-[color:var(--ruling)] bg-transparent py-2 text-[15px] outline-none focus:border-[color:var(--action-ink)]" />
               </label>
             ))}
             <label className="flex flex-col gap-1">
-              <span className="text-lg">Question</span>
-              <textarea name="message" rows={3} className="border border-input bg-transparent p-2 text-lg focus:outline-ring" />
+              <span className="ui-control opacity-70">Question</span>
+              <textarea name="message" rows={3} className="rounded-[3px] border border-[color:var(--ruling)] bg-transparent p-2 text-[15px] focus:outline-[color:var(--action-ink)]" />
             </label>
             <Button type="submit" variant="lettering" disabled={sending} className="ui-button self-start">{sending ? "Sending…" : "Send"}</Button>
           </form>
