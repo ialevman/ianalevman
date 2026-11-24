@@ -52,17 +52,29 @@ function Index() {
         </div>
         </div>
 
-        {/* One even column: every work at the full width of the page. */}
-        <div className="mx-auto mt-12 grid max-w-6xl gap-y-20 px-5 md:gap-y-28">
-          {list.map((w) => (
-            <Link key={w.slug} to="/works/$slug" params={{ slug: w.slug }} className="group block">
-              <img src={w.image} alt={w.title} width={w.w} height={w.h} loading="lazy" className={`fade-in glass-hover h-auto w-full ${w.category === "Video" ? "aspect-video object-cover" : ""}`} />
-              <div className="mt-3 flex flex-wrap items-baseline gap-x-3">
-                <span className="text-[15px] font-normal group-hover:underline">{w.title}</span>
-                <Label className="gallery-caption">{w.year} · {w.category}{w.available ? "" : " · Sold"}{onlyAvailable && w.price ? ` · ${w.price}` : ""}</Label>
+        {/* Even two-column grid, grouped by medium: video first, then paintings, then works on paper. */}
+        <div className="mx-auto mt-12 max-w-6xl px-5">
+          {CATEGORIES.filter((c) => tab === "All" || tab === c).map((c) => {
+            const items = list.filter((w) => w.category === c);
+            if (items.length === 0) return null;
+            return (
+              <div key={c} className="mb-24">
+                {tab === "All" && <h2 className="ui-control mb-6 border-b border-[color:var(--ruling)] pb-3">{c}</h2>}
+                <div className="grid items-start gap-x-10 gap-y-16 md:grid-cols-2">
+                  {items.map((w) => (
+                    <Link key={w.slug} to="/works/$slug" params={{ slug: w.slug }} className="group block">
+                      <img src={w.image} alt={w.title} width={w.w} height={w.h} loading="lazy"
+                        className={`fade-in glass-hover h-auto w-full ${c === "Video" ? "aspect-video object-cover" : c === "Works on Paper" ? "aspect-[21/29] max-h-[calc(100vh-220px)] object-contain object-left-bottom" : "aspect-[4/5] max-h-[calc(100vh-220px)] object-contain object-left-bottom"}`} />
+                      <div className="mt-3 flex flex-wrap items-baseline gap-x-3">
+                        <span className="text-[15px] font-normal group-hover:underline">{w.title}</span>
+                        <Label className="gallery-caption">{w.year}{w.available ? "" : " · Sold"}{onlyAvailable && w.price ? ` · ${w.price}` : ""}</Label>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
               </div>
-            </Link>
-          ))}
+            );
+          })}
           {list.length === 0 && <p className="text-muted-foreground">No works here yet.</p>}
         </div>
       </section>
