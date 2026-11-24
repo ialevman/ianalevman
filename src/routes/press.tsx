@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PRESS } from "@/data/press";
+import { PinnedHeading } from "@/components/site-chrome";
 
 export const Route = createFileRoute("/press")({
   head: () => ({ meta: [
@@ -18,9 +19,7 @@ function Press() {
   return (
     /* Same hand-off as the Artworks gallery: when this section reaches the top, the bottle hides and "Press" stays pinned. */
     <section data-artworks-start className="mt-12 pb-16">
-      <div className="sticky top-0 z-40 bg-background">
-        <h1 className="gallery-lettering mx-auto max-w-6xl px-5 py-4 text-[32px] md:py-5 md:text-[44px]">Press</h1>
-      </div>
+      <PinnedHeading title="Press" />
       <div className="mx-auto mt-8 grid max-w-6xl px-5 gap-x-10 gap-y-14 md:grid-cols-2">
         {PRESS.map((p, i) => (
           <a key={p.url} href={p.url} target="_blank" rel="noopener noreferrer" lang={p.lang}

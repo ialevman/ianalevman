@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { PinnedHeading } from "@/components/site-chrome";
 
 export const Route = createFileRoute("/cv")({
   head: () => ({ meta: [
@@ -44,8 +45,9 @@ function Rows({ items }: { items: { year: string; what: string; where: string; n
 
 function CV() {
   return (
-    <section className="mx-auto max-w-4xl px-5 py-16">
-      <h1 className="gallery-lettering text-[32px] md:text-[44px]">CV</h1>
+    <section data-artworks-start className="mt-12 pb-16">
+      <PinnedHeading title="CV" width="max-w-4xl" />
+      <div className="mx-auto max-w-4xl px-5">
       <p className="mt-6 max-w-2xl text-lg leading-relaxed">
         Iana Levman (b. 1991, Artem, Russia) is an artist based in Tallinn, Estonia. After relocating to Estonia, her
         ancestral homeland, her practice became increasingly focused on questions of belonging, memory and
@@ -58,6 +60,7 @@ function CV() {
       <Rows items={EDUCATION} />
       <h2 className="cv-heading">Press</h2>
       <p className="text-lg">Jupiter · ERR, ETV+ Horizont, Radio 4, Voice of the Islands — <Link to="/press" className="underline underline-offset-4">see Press</Link>.</p>
+      </div>
     </section>
   );
 }

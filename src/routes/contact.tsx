@@ -2,6 +2,7 @@ import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { sendForm, SEND_FAILED } from "@/lib/send-form";
+import { PinnedHeading } from "@/components/site-chrome";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -20,9 +21,10 @@ export const Route = createFileRoute("/contact")({
 function Contact() {
   const [sending, setSending] = useState(false);
   return (
-    <div className="mx-auto grid max-w-6xl gap-12 px-5 py-16 md:grid-cols-[1fr_1.2fr]">
-      <h1 className="text-[40px] font-extrabold leading-[0.9] md:mt-10 md:text-[56px]">Contact</h1>
-      <form className="flex flex-col gap-5"
+    <section data-artworks-start className="mt-12 pb-16">
+      <PinnedHeading title="Contact" />
+      <div className="mx-auto max-w-6xl px-5 pt-6">
+      <form className="flex max-w-2xl flex-col gap-5"
         onSubmit={async (e) => {
           e.preventDefault(); const f = e.currentTarget; const d = new FormData(f); setSending(true);
           const ok = await sendForm("Contact", { name: String(d.get("name") ?? ""), email: String(d.get("email") ?? ""), message: String(d.get("message") ?? "") });
@@ -41,6 +43,7 @@ function Contact() {
         </label>
         <button disabled={sending} className={`font-label self-start bg-primary px-8 py-3 text-lg text-primary-foreground hover:bg-accent ${sending ? "lace-loading" : ""}`}>{sending ? "Sending…" : "Send"}</button>
       </form>
-    </div>
+      </div>
+    </section>
   );
 }

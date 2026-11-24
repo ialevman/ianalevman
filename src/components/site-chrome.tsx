@@ -11,6 +11,18 @@ export function Carpet({ className = "" }: { className?: string }) {
   return <div aria-hidden className={`carpet-bg pointer-events-none absolute inset-0 opacity-[0.05] saturate-50 ${className}`} />;
 }
 
+/**
+ * Page title that pins to the top like "Artworks". Put it first inside an element marked `data-artworks-start`:
+ * when that element reaches the bottle's lower edge the bottle hides and this heading takes the top edge.
+ */
+export function PinnedHeading({ title, width = "max-w-6xl" }: { title: string; width?: string }) {
+  return (
+    <div className="sticky top-0 z-40 bg-background">
+      <h1 className={`gallery-lettering mx-auto ${width} px-5 py-4 text-[32px] md:py-5 md:text-[44px]`}>{title}</h1>
+    </div>
+  );
+}
+
 function CollectorsSignup() {
   const [email, setEmail] = useState("");
   const [sending, setSending] = useState(false);

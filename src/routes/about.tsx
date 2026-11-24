@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Carpet } from "@/components/site-chrome";
+import { Carpet, PinnedHeading } from "@/components/site-chrome";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -28,12 +28,13 @@ const TEXT = [
 
 function About() {
   return (
-    <div className="relative">
+    <div data-artworks-start className="relative mt-12 pb-16">
       <Carpet className="opacity-[0.14]" />
-      <div className="relative mx-auto max-w-5xl px-5 py-16">
-        <h1 className="mx-auto max-w-[900px] text-[40px] font-extrabold leading-[0.9] md:text-[56px]">About</h1>
+      {/* 900px portrait + 2×20px padding, so the title starts exactly at the picture's left edge */}
+      <PinnedHeading title="About" width="max-w-[940px]" />
+      <div className="relative mx-auto max-w-5xl px-5 pt-6">
         {/* The same portrait twice, the right one mirrored, so the two look towards each other. */}
-        <div className="about-diptych mt-10" aria-label="Portrait of Iana Levman">
+        <div className="about-diptych" aria-label="Portrait of Iana Levman">
           <img src="/media/about-portrait.webp" alt="Iana Levman" width={1200} height={1200} className="h-auto w-full" />
           <img src="/media/about-portrait.webp" alt="" aria-hidden width={1200} height={1200} className="h-auto w-full -scale-x-100" />
         </div>
