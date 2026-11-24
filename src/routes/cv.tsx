@@ -14,7 +14,7 @@ export const Route = createFileRoute("/cv")({
 });
 
 const EXHIBITIONS = [
-  { year: "2026", what: "Film screening", where: "Sõprus Cinema, Tallinn, Estonia", note: "Broadcast on Jupiter TV / ETV+" },
+  { year: "2026", what: "Film screening", where: "Sõprus Cinema, Tallinn, Estonia", note: "Broadcast on Jupiter TV / ETV+", link: { label: "Watch on Jupiter TV →", url: "https://jupiter.err.ee/1609988167/kodu-on-koht-kus-ma-kunagi-olnud-ei-ole" } },
   { year: "2025", what: "Solo exhibition", where: "Thule Koda, Kuressaare, Estonia" },
   { year: "2025", what: "Residency and group exhibition", where: "Psychiatric Hospital Center of Lisbon, Lisbon, Portugal" },
   { year: "2024", what: "Group exhibition", where: "Kunstraum Kreuzberg, Berlin, Germany" },
@@ -26,7 +26,7 @@ const EDUCATION = [
   { year: "2023–2025", what: "Ar.co, Centre for Art and Visual Communication", where: "Lisbon, Portugal" },
 ];
 
-function Rows({ items }: { items: { year: string; what: string; where: string; note?: string }[] }) {
+function Rows({ items }: { items: { year: string; what: string; where: string; note?: string; link?: { label: string; url: string } }[] }) {
   return (
     <ul className="cv-rows">
       {items.map((r, i) => (
@@ -36,6 +36,7 @@ function Rows({ items }: { items: { year: string; what: string; where: string; n
             <span className="cv-what">{r.what}</span>
             <span className="cv-where">{r.where}</span>
             {r.note && <span className="cv-where">{r.note}</span>}
+            {r.link && <a href={r.link.url} target="_blank" rel="noopener noreferrer" className="cv-where underline underline-offset-4">{r.link.label}</a>}
           </span>
         </li>
       ))}
