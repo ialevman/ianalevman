@@ -251,17 +251,15 @@
   height: 48px; padding: 0 28px; border: 1px solid var(--action-ink); border-radius: 3px;
   background: transparent; color: var(--action-ink);
   font-family: var(--font-ui); font-weight: 500; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase;
-  transition: background-color 150ms ease, font-weight 150ms ease, box-shadow 150ms ease;
+  transition: background-color 200ms ease;
 }
-/* Hover: the button turns into a little sheet of squared notebook paper, lettering a touch heavier. */
+/* Hover: only the background changes, to a little sheet of squared notebook paper. */
 .ui-button:hover {
-  font-weight: 700; color: var(--action-ink);
   background-color: #eef3f7;
   background-image:
     linear-gradient(to right, color-mix(in oklab, var(--ruling) 70%, transparent) 0 1px, transparent 1px),
     linear-gradient(to bottom, color-mix(in oklab, var(--ruling) 70%, transparent) 0 1px, transparent 1px);
   background-size: 12px 12px;
-  box-shadow: 0 4px 10px oklch(0.2 0.04 250 / 0.15);
 }
 .ui-button:disabled { opacity: 0.5; }
 .gallery-caption { font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.6; }
