@@ -43,7 +43,7 @@ function Index() {
           <div role="tablist" aria-label="Work categories" className="flex flex-wrap gap-x-5 gap-y-2 md:gap-x-6">
             {(["All", ...CATEGORIES] as Tab[]).map((t) => (
               <Button variant="lettering" key={t} role="tab" aria-selected={tab === t} onClick={() => setTab(t)}
-                className={`h-auto min-h-11 whitespace-normal p-0 text-xl font-bold md:text-2xl ${tab === t ? "text-accent underline decoration-2 underline-offset-4" : "text-foreground hover:underline"}`}>{t}</Button>
+                className={`h-auto min-h-11 whitespace-normal p-0 text-xl font-bold md:text-2xl ${tab === t ? "underline decoration-2 underline-offset-4" : "hover:underline"}`}>{t}</Button>
             ))}
           </div>
           <label className="flex min-h-11 cursor-pointer items-center gap-3 text-xl md:text-2xl">

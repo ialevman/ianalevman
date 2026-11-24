@@ -94,6 +94,8 @@
   --paper: #fbfaf4;
   --ruling: #b9c9d6;
   --ink: oklch(0.38 0.09 258);
+  /* Text of buttons and commands: the notebook ruling, deepened enough to read. */
+  --action-ink: oklch(0.47 0.075 245);
   --background: var(--paper);
   --foreground: oklch(0.2 0.012 150);
   --card: var(--paper);

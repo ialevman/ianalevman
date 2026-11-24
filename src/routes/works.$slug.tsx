@@ -39,6 +39,13 @@ function WorkPage() {
       <div className="grid gap-10">
         {work.privateVideo ? (
           <PrivateVideo slug={work.slug} title={work.title} poster={work.image} w={work.w} h={work.h} />
+        ) : work.watch ? (
+          <a href={work.watch.url} target="_blank" rel="noopener noreferrer" className="group relative block self-start" aria-label={`${work.watch.label}: ${work.title}`}>
+            <img src={work.image} alt={work.title} width={work.w} height={work.h} className="fade-in h-auto w-full" />
+            <span className="absolute inset-0 flex items-center justify-center bg-black/15 transition-colors group-hover:bg-black/30">
+              <span className="rounded-full bg-white/85 px-6 py-3 text-xl font-bold text-[color:var(--action-ink)]">▶ {work.watch.label}</span>
+            </span>
+          </a>
         ) : (
           <img src={work.image} alt={work.title} width={work.w} height={work.h} className="fade-in h-auto w-full" />
         )}
